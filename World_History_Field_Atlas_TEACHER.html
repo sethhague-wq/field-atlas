@@ -1,0 +1,1734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Modern World History — Field Atlas (Teacher Edition)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EDE3C8;
+  --paper-2:#E4D6AE;
+  --paper-deep:#DCCB9C;
+  --ink:#26313B;
+  --ink-soft:#55606B;
+  --brass:#9C7A28;
+  --brass-deep:#7A5E1D;
+  --brick:#8B3A2B;
+  --sage:#54613F;
+  --rule:#C6B584;
+  --white-ish:#FBF7EA;
+  --shadow: 2px 3px 0 rgba(38,49,59,0.08);
+  --radius: 3px;
+  --font-display: 'Spectral', serif;
+  --font-body: 'Source Serif 4', serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  background:var(--paper);
+  background-image:
+    radial-gradient(ellipse at top left, rgba(255,255,255,0.35), transparent 60%),
+    radial-gradient(ellipse at bottom right, rgba(0,0,0,0.05), transparent 60%);
+  color:var(--ink);
+  font-family:var(--font-body);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;}
+button{font-family:inherit;cursor:pointer;}
+
+/* ---------- HEADER ---------- */
+header.hero{
+  padding:2.6rem 2rem 1.4rem;
+  border-bottom:1px solid var(--rule);
+  position:relative;
+}
+.hero-inner{max-width:1180px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap;}
+.hero-eyebrow{
+  font-family:var(--font-mono);
+  font-size:0.72rem;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--brass-deep);
+  margin:0 0 0.5rem;
+}
+.hero h1{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(1.9rem,4vw,3rem);
+  margin:0;
+  color:var(--ink);
+  letter-spacing:-0.01em;
+}
+.hero h1 em{font-style:italic;color:var(--brick);}
+.hero-sub{font-family:var(--font-display);font-style:italic;color:var(--ink-soft);font-size:1.05rem;margin-top:0.4rem;max-width:46ch;}
+.compass{width:76px;height:76px;flex-shrink:0;opacity:0.9;}
+.legend{
+  display:flex;gap:1.1rem;flex-wrap:wrap;
+  font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.04em;color:var(--ink-soft);
+  margin-top:0.9rem;
+}
+.legend span{display:inline-flex;align-items:center;gap:0.35rem;}
+.legend i{width:9px;height:9px;border-radius:50%;display:inline-block;}
+
+/* ---------- TRAIL NAV ---------- */
+nav.trail-wrap{
+  border-bottom:1px solid var(--rule);
+  background:linear-gradient(var(--paper-2),var(--paper-2));
+  overflow-x:auto;
+  padding:1.1rem 0 0.9rem;
+}
+.trail{
+  display:flex;
+  align-items:flex-start;
+  gap:0;
+  min-width:max-content;
+  padding:0 2rem;
+  position:relative;
+  max-width:1180px;
+  margin:0 auto;
+}
+.trail::before{
+  content:'';
+  position:absolute;
+  top:20px;left:2rem;right:2rem;
+  height:0;
+  border-top:2px dashed var(--brass);
+  opacity:0.55;
+  z-index:0;
+}
+.waypoint{
+  position:relative;z-index:1;
+  display:flex;flex-direction:column;align-items:center;
+  width:84px;flex-shrink:0;
+  background:none;border:none;padding:0;
+}
+.pin{
+  width:15px;height:15px;border-radius:50%;
+  border:2px solid var(--white-ish);
+  box-shadow:0 0 0 1.5px var(--ink);
+  margin-bottom:8px;
+  transition:transform 0.15s ease;
+}
+.waypoint:hover .pin, .waypoint.active .pin{transform:scale(1.35);}
+.waypoint.active .pin{box-shadow:0 0 0 2px var(--brick);}
+.wp-num{font-family:var(--font-mono);font-size:0.62rem;color:var(--ink-soft);}
+.wp-label{
+  font-family:var(--font-display);font-size:0.68rem;font-weight:600;
+  text-align:center;color:var(--ink);line-height:1.15;margin-top:2px;
+  max-width:82px;
+}
+.wp-flags{display:flex;gap:3px;margin-top:4px;height:10px;}
+.flag-quiz{width:6px;height:6px;background:var(--sage);border-radius:1px;}
+.flag-test{width:6px;height:6px;background:var(--brick);transform:rotate(45deg);}
+
+/* ---------- MODE TOGGLE ---------- */
+.mode-toggle{max-width:1180px;margin:0 auto;padding:1rem 2rem 0;display:flex;gap:0.6rem;}
+.mode-btn{
+  font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;
+  background:var(--paper);border:1px solid var(--rule);border-radius:3px;padding:0.5rem 0.9rem;
+  color:var(--ink-soft);
+}
+.mode-btn.active{background:var(--ink);color:var(--white-ish);border-color:var(--ink);}
+
+/* ---------- QUESTION SIMULATOR ---------- */
+.quiz-layout{display:grid;grid-template-columns:230px 1fr;gap:1.5rem;margin-top:1rem;}
+.quiz-sidebar-label{font-family:var(--font-mono);font-weight:bold;color:var(--ink);font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.6rem;}
+.quiz-chapter-btn{display:block;width:100%;text-align:left;padding:0.6rem 0.7rem;margin-bottom:0.4rem;border-radius:6px;border:1px solid var(--rule);background:var(--white-ish);color:var(--ink);font-family:var(--font-display);font-size:0.85rem;cursor:pointer;}
+.quiz-chapter-btn.active{background:var(--brick);color:var(--white-ish);border-color:var(--brick);}
+.quiz-chapter-count{font-size:0.7rem;opacity:0.8;margin-top:0.15rem;}
+.quiz-toolbar{display:flex;align-items:center;justify-content:space-between;gap:0.7rem;flex-wrap:wrap;margin-bottom:1rem;}
+.quiz-toolbar-actions{display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;}
+.quiz-add-box{background:var(--white-ish);border:1px solid var(--rule);border-radius:8px;padding:1rem;margin-bottom:1.2rem;}
+.quiz-add-label{font-family:var(--font-display);font-weight:bold;font-size:0.9rem;color:var(--ink);margin-bottom:0.5rem;}
+.quiz-add-box textarea{width:100%;min-height:140px;padding:0.7rem;font-family:var(--font-display);font-size:0.88rem;border:1px solid var(--rule);border-radius:6px;box-sizing:border-box;resize:vertical;color:var(--ink);line-height:1.5;margin-bottom:0.6rem;}
+.quiz-add-controls{display:flex;align-items:center;gap:0.9rem;flex-wrap:wrap;}
+.quiz-error{margin-top:0.7rem;padding:0.6rem 0.8rem;background:#FBEAE6;color:var(--brick);border-radius:6px;font-size:0.82rem;}
+.quiz-card{background:var(--white-ish);border:1px solid var(--rule);border-radius:8px;padding:1rem;margin-bottom:0.8rem;}
+.quiz-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:0.6rem;}
+.quiz-card-q{font-family:var(--font-display);font-weight:bold;color:var(--ink);font-size:0.92rem;margin-bottom:0.6rem;}
+.quiz-remove-btn{flex-shrink:0;font-family:var(--font-mono);font-size:0.68rem;color:var(--brick);background:white;border:1px solid var(--brick);border-radius:5px;padding:0.2rem 0.5rem;cursor:pointer;}
+.quiz-choice{padding:0.4rem 0.6rem;margin-bottom:0.25rem;border-radius:5px;font-size:0.85rem;color:var(--ink);}
+.quiz-choice.correct{background:#EAF1E4;color:var(--sage);font-weight:bold;}
+.quiz-source-row{margin-top:0.5rem;}
+.quiz-source-btn{font-family:var(--font-mono);font-size:0.68rem;color:var(--ink-soft);background:white;border:1px solid var(--rule);border-radius:5px;padding:0.25rem 0.6rem;cursor:pointer;}
+.quiz-source-text{margin-top:0.4rem;font-size:0.8rem;color:var(--brass-deep);font-style:italic;border-left:3px solid var(--brass);padding-left:0.6rem;}
+.quiz-print{font-family:var(--font-display);color:var(--ink);max-width:8.5in;margin:0 auto;}
+@media print{ .no-print{display:none !important;} }
+
+/* ---------- CALENDAR VIEW ---------- */
+.cal-row{
+  display:grid;grid-template-columns:130px 1fr;gap:1rem;
+  border-bottom:1px solid var(--rule);padding:0.8rem 0;align-items:start;
+}
+.cal-date{font-family:var(--font-mono);font-size:0.78rem;color:var(--brass-deep);padding-top:0.15rem;}
+.cal-break{
+  background:var(--paper-deep);border-radius:3px;padding:0.5rem 0.9rem;margin:0.4rem 0;
+  font-family:var(--font-display);font-style:italic;font-size:0.85rem;color:var(--ink-soft);
+}
+.cal-title{font-family:var(--font-display);font-weight:600;font-size:1rem;}
+.cal-meta{font-size:0.85rem;color:var(--ink-soft);margin-top:0.15rem;}
+.cal-flag{
+  display:inline-block;margin-top:0.3rem;font-family:var(--font-mono);font-size:0.65rem;
+  color:var(--brick);text-transform:uppercase;letter-spacing:0.04em;
+}
+.cal-buffer{opacity:0.7;}
+
+
+main{max-width:1180px;margin:0 auto;padding:2.2rem 2rem 5rem;}
+.unit-banner{
+  font-family:var(--font-mono);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--brass-deep);margin-bottom:0.3rem;
+}
+.week-title{
+  font-family:var(--font-display);font-weight:700;font-size:clamp(1.5rem,3vw,2.1rem);
+  margin:0 0 0.15rem;
+}
+.week-meta{font-family:var(--font-display);font-style:italic;color:var(--ink-soft);margin-bottom:1.8rem;}
+
+.card{
+  background:var(--white-ish);
+  border:1px solid var(--rule);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:1.5rem 1.6rem;
+  margin-bottom:1.6rem;
+}
+.card h2{
+  font-family:var(--font-mono);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--brass-deep);margin:0 0 1rem;display:flex;align-items:center;gap:0.5rem;
+}
+.card h2::before{content:'';width:14px;height:1px;background:var(--brass-deep);display:inline-block;}
+
+/* terms */
+.terms-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:0.7rem;}
+.term-card{
+  border:1px solid var(--rule);border-radius:var(--radius);
+  padding:0.7rem 0.85rem;cursor:pointer;background:var(--paper);
+  transition:background 0.15s ease;
+  min-height:64px;
+}
+.term-card:hover{background:var(--paper-2);}
+.term-card .t-num{font-family:var(--font-mono);font-size:0.62rem;color:var(--brass-deep);}
+.term-card .t-word{font-family:var(--font-display);font-weight:600;font-size:0.95rem;margin-top:2px;}
+.term-card .t-def{font-size:0.83rem;color:var(--ink-soft);margin-top:0.4rem;display:none;line-height:1.4;}
+.term-card.open .t-def{display:block;}
+.term-card.open{background:var(--paper-deep);}
+
+/* script table */
+.script-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0.6rem;}
+
+/* ---------- DETAILED DAY SCRIPT ---------- */
+.day-tabs{display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:1.1rem;}
+.day-tab-btn{
+  font-family:var(--font-mono);font-size:0.72rem;letter-spacing:0.05em;
+  background:var(--paper);border:1px solid var(--rule);border-radius:3px;
+  padding:0.4rem 0.8rem;color:var(--ink-soft);
+}
+.day-tab-btn.active{background:var(--brick);color:var(--white-ish);border-color:var(--brick);}
+.day-detail{border-top:2px solid var(--ink);padding-top:1rem;}
+.dd-head{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--font-mono);font-size:0.72rem;color:var(--brass-deep);margin-bottom:0.3rem;}
+.dd-title{font-family:var(--font-display);font-weight:700;font-size:1.2rem;margin-bottom:1rem;}
+.dd-type{font-family:var(--font-mono);font-size:0.62rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--white-ish);background:var(--sage);padding:0.12rem 0.5rem;border-radius:2px;margin-left:0.4rem;vertical-align:middle;}
+.dd-section{margin-bottom:1.1rem;padding-left:0.9rem;border-left:3px solid var(--rule);}
+.dd-section.dd-open{border-left-color:var(--brass);}
+.dd-section.dd-agenda{border-left-color:var(--ink);}
+.dd-section.dd-activity{border-left-color:var(--sage);}
+.dd-section.dd-close{border-left-color:var(--brick);}
+.dd-label{font-family:var(--font-mono);font-size:0.7rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-soft);margin-bottom:0.4rem;}
+.dd-time{font-family:var(--font-mono);font-weight:400;color:var(--brass-deep);margin-left:0.4rem;}
+.dd-sec-title{font-family:var(--font-display);font-weight:600;font-size:0.98rem;margin-bottom:0.2rem;}
+.dd-agenda-item{margin-bottom:0.8rem;}
+.dd-agenda-item:last-child{margin-bottom:0;}
+.day-detail p{font-size:0.9rem;line-height:1.55;margin:0.2rem 0 0;}
+
+.day{border-left:2px solid var(--brass);padding-left:0.7rem;}
+.day .d-name{font-family:var(--font-mono);font-size:0.68rem;letter-spacing:0.08em;text-transform:uppercase;color:var(--brick);}
+.day .d-title{font-family:var(--font-display);font-weight:600;margin:0.15rem 0 0.3rem;font-size:0.95rem;}
+.day .d-body{font-size:0.83rem;color:var(--ink-soft);line-height:1.45;}
+.day.friday-test .d-name{color:var(--brick);}
+.day.friday-test{border-left-color:var(--brick);}
+
+/* primary source & project */
+.ps-source{font-family:var(--font-display);font-style:italic;color:var(--brass-deep);margin-bottom:0.5rem;}
+.tag{
+  display:inline-block;font-family:var(--font-mono);font-size:0.6rem;letter-spacing:0.06em;
+  text-transform:uppercase;background:var(--paper-deep);color:var(--ink);padding:0.15rem 0.5rem;
+  border-radius:2px;margin-bottom:0.6rem;
+}
+.tag.your-doc{background:var(--sage);color:var(--white-ish);}
+.tag.textbook{background:var(--brass);color:var(--white-ish);}
+.tag.suggested{background:var(--rule);color:var(--ink);}
+
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;}
+@media (max-width:760px){.two-col{grid-template-columns:1fr;} .script-grid{grid-template-columns:1fr;}}
+
+.note{
+  font-size:0.85rem;color:var(--ink-soft);font-style:italic;border-top:1px dashed var(--rule);
+  margin-top:1rem;padding-top:0.8rem;
+}
+footer{
+  text-align:center;padding:2rem;font-family:var(--font-mono);font-size:0.68rem;color:var(--ink-soft);
+  border-top:1px solid var(--rule);
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <p class="hero-eyebrow">Island School &middot; Modern World History &middot; 9th Grade &middot; Teacher Edition</p>
+      <h1>The Field Atlas<br><em>a teaching expedition</em></h1>
+      <p class="hero-sub">History Alive! World Connections — the better we understand the past, the better we are equipped to engage with our present.</p>
+      <div class="legend">
+        <span><i style="background:var(--ink)"></i>Foundations &amp; Geography</span>
+        <span><i style="background:var(--brass)"></i>Revolutions &amp; Industry</span>
+        <span><i style="background:var(--brick)"></i>Crisis &amp; World Wars</span>
+        <span><i style="background:var(--sage)"></i>Cold War</span>
+        <span><i style="background:var(--brass-deep)"></i>Contemporary World</span>
+      </div>
+    </div>
+    <svg class="compass" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="46" fill="none" stroke="#26313B" stroke-width="1.5" opacity="0.7"/>
+      <circle cx="50" cy="50" r="38" fill="none" stroke="#9C7A28" stroke-width="1" opacity="0.6"/>
+      <path d="M50 8 L56 48 L50 92 L44 48 Z" fill="#8B3A2B" opacity="0.85"/>
+      <path d="M8 50 L48 44 L92 50 L48 56 Z" fill="#26313B" opacity="0.5"/>
+      <circle cx="50" cy="50" r="4" fill="#26313B"/>
+      <text x="50" y="10" font-family="IBM Plex Mono" font-size="7" fill="#26313B" text-anchor="middle">N</text>
+    </svg>
+  </div>
+</header>
+
+<nav class="trail-wrap">
+  <div class="trail" id="trail"></div>
+</nav>
+
+<div class="mode-toggle">
+  <button id="modeWeekly" class="mode-btn active" onclick="setMode('weekly')">Weekly Plan</button>
+  <button id="modeCal" class="mode-btn" onclick="setMode('calendar')">Reading &amp; Assignment Calendar</button>
+  <button id="modeQuiz" class="mode-btn" onclick="setMode('quiz')">Question Simulator</button>
+</div>
+
+<main id="main"></main>
+
+<footer>Built for Hague &middot; Island School Humanities &middot; adjust terms &amp; scripts freely against the physical textbook</footer>
+
+<script>
+const UNIT_COLORS = {
+  foundations:'#26313B', revolutions:'#9C7A28', crisis:'#8B3A2B', coldwar:'#54613F', contemporary:'#7A5E1D'
+};
+
+const WEEKS = [{n:1, unit:'foundations', unitLabel:'Launch — Foundations', label:'Historiography & the Timeline', meta:"Day 1 (Wed) welcome + syllabus, Day 2 (Thu) pre-assessment, Day 3 (Mon) onward: historiography and the origin of the timeline", quiz:true, test:false,
+  terms:[
+    ['Artifact','An object made or used by people in the past that historians study as evidence.'],
+    ['Primary Source','An account or object created by someone who directly witnessed or lived through an event.'],
+    ['Secondary Source','A source that interprets or analyzes primary sources after the fact.'],
+    ['Chronology','The arrangement of events in the order they occurred.'],
+    ['Archaeology','The study of past human life through excavated material remains.'],
+    ['Radiocarbon Dating','A scientific method that estimates the age of organic material using decay rates.'],
+    ['Historiography','The study of how history has been written and interpreted over time.'],
+    ['Bias','A leaning or slant in a source that favors one perspective over another.'],
+    ['Corroboration','Confirming a claim by checking it against another independent source.'],
+    ['Causation','The relationship between an event and the reason it happened.']
+  ],
+  script:[
+    ['Day 1 · Wed','Welcome, Syllabus & Points System','Get-to-know-you exercise, then walk the syllabus. Post the points system permanently — earning values, the redirect ladder, concrete consequences for disrespect and interruptions — before any content starts.'],
+    ['Day 2 · Thu','Pre-Assessment','Students take the diagnostic survey (timeline placement, primary/secondary sorting, basic map reading). This is data for you, not a grade for them.'],
+    ['Day 3 · Mon','Where Does a Timeline Come From?','Launch the Historiography & Timeline unit: why historians agreed on a standardized, dated framework for the past, and how that framework lets us learn from what came before. Introduce this week\'s 10 terms.'],
+    ['Day 4','Reading a Story from the Past + Mystery Object','Practice engaging critically with a story from the past using a primary/secondary source pair, then the mystery-object activity — bring an unlabeled artifact and have students reason out age/use/origin from physical evidence alone. Run the points system live here so it\'s reinforced through use, not just posted.'],
+    ['Day 5','Quiz Day','Quiz checks this week\'s 10 terms and the points system itself, so expectations get tested rather than assumed.']
+  ],
+  primarySource:{tag:'suggested', title:'Mystery Artifact Analysis', source:'Any unlabeled object or artifact photo you bring in', task:'Students build a claim about the object\'s age, use, and origin using only physical evidence — the same reasoning archaeologists use.'},
+  project:{title:'Personal Timeline', task:'Students build a short illustrated timeline of their own life, then annotate which entries they know from primary sources (memory, photos) vs. secondary sources (family stories) — practicing the same source-type distinction historians use.'},
+  detailedDays:[
+    {
+      dateLabel:'Day 1 — Wed, Aug 5', periodNote:'Period TBD — first day of school', title:'Welcome — Get-to-Know-You, Syllabus \u0026 Points System', type:'orientation',
+      open:{time:'0:00–0:05', title:'Name Placard & Warm-Up', text:'Have this on the board before students arrive: "Put backpacks on the shelves. Find your seat and begin making a name placard." Students fold an index card lengthwise so it stands up like a tent, name in big letters on the front. On the back, three questions: your favorite ice cream or cold dessert, the most important person to you, and your happiest place to visit (or thing to do) on island. Give about 5 minutes. [The placard does double duty all class: it gets you learning names fast, and the back becomes ready-made material for both the four corners discussion and the partner interview that follow — nobody has to invent small talk from scratch.]'},
+      agenda:[
+        {time:'0:05–0:20', title:'Get-to-Know-You (15 min)', text:'Two quick structures back to back — attention spans are short on Day 1. Structure 1 — Four Corners: The American Experiment (7 min): label the room\'s four corners with four caricatures of the American experiment — The Pioneer (new frontiers, self-reliance), The Dreamer (reinvention, opportunity), The Rebel (questioning authority, standing up for a cause), and The Builder (creating something lasting, ingenuity). Ask which one feels most like them right now, have them move to their pick with placard in hand, then in each corner have students share one answer off the back of their placard before you cold-call one student per corner for 10 seconds on why they picked it. Structure 2 — Partner Interview (8 min): pair students, placards out, 60 seconds each direction using the back of the placard as the script. Then each student introduces their partner in a single sentence, placard held up.'},
+        {time:'0:20–0:35', title:'Syllabus Walkthrough (15 min)', text:'Don\'t read it line by line — hit five things and let the rest be read at home. (1) Grading breakdown: sketch it as a pie chart on the board while you talk (Assessments 40%, Essays \u0026 Project Papers 25%, Participation \u0026 In-Class Activities 35%). (2) The weekly rhythm: Monday 10 terms, Friday quiz, tests every 2–3 weeks — flag that this rhythm never changes, so it becomes automatic fast. (3) The notebook and device policy: physical notebook required daily, computers only for the two research projects. (4) Late work, retakes, and academic honesty stated plainly, with a show of hands confirming everyone heard them. (5) How to reach you — write your email on the board and have students copy it into their phone or planner right now, in the room.'},
+        {time:'0:35–0:48', title:'Points System, Posted (13 min)', text:'Post the full system permanently — earning values for on-task/prepared/participation/collaboration, and the five-step redirect ladder from nonverbal cue through administrative referral. Establish the nonverbal signal itself right now and have the class practice responding to it once, so it isn\'t new the first time you need it for real.'},
+        {time:'0:48–0:58', title:'Preview the Year (10 min)', text:'Walk the year\'s arc in under two minutes per stretch: Historiography \u0026 Geography (2 weeks) → the Age of Revolutions → A World in Crisis → the Cold War → the Contemporary World — plus the two research projects (a current-issue slide project this fall, a historical-artifact project in the spring) and the Model World Summit capstone near the end. Name the throughline explicitly: this class works backward from the present as much as forward through the past.'}
+      ],
+      activity:{time:'0:58–end', title:'Term List Handout', text:'If time remains, hand out this week\'s 10 terms (Artifact, Primary Source, Secondary Source, Chronology, Archaeology, Radiocarbon Dating, Historiography, Bias, Corroboration, Causation). Due Friday — tell them not to start tonight, that\'s covered in class Day 3.'},
+      close:{time:'final 2 min', text:'"Tomorrow\'s class is shorter, and it\'s just for you — I want to see what you\'re walking in with before I teach you anything. No grade, no prep needed. Bring a pencil."'}
+    },
+    {
+      dateLabel:'Day 2 — Thu, Aug 6', periodNote:'Period TBD', title:'Pre-Assessment', type:'diagnostic',
+      open:{time:'0:00–0:03', title:'Frame It', text:'"Today has one job: show me what you\'re walking in with. This isn\'t graded — it\'s how I plan the rest of the semester." Pass out the diagnostic.'},
+      agenda:[
+        {time:'0:03–0:40', title:'Diagnostic Survey (37 min)', text:'Three sections, silent, no phones or textbooks. (1) Timeline placement — a blank horizontal timeline with loose era labels (Ancient/Medieval/Early Modern/Modern) and 8–10 events or figures to place roughly. (2) Primary vs. secondary sourcing — 4–5 short excerpts; students mark P or S and give one reason. (3) Basic map reading — a world map; students label continents/oceans and answer 2–3 questions using a legend and scale bar. [Use this — not any prior grades — to gauge who\'s arriving with real chronological/geographic fluency versus a blank slate. It shapes how much scaffolding Days 3–4 need, and it\'s useful evidence if a parent ever asks why 9th grade World History spends time on map skills.]'},
+        {time:'0:40–0:50', title:'Quick Share-Out (10 min)', text:'Not grading, just surfacing: "Show of hands — who felt confident on the timeline? The sourcing? The map?" Normalize not knowing yet: "That\'s exactly why we\'re starting here, not with the textbook."'}
+      ],
+      activity:{time:'—', title:'None today', text:'The diagnostic is the full period\'s work.'},
+      close:{time:'final 2 min', text:'"We pick up historiography Monday — no class Friday, so hang onto today\'s momentum. Come back ready to ask a big question: how do we even know what happened before anyone alive today was born?"'}
+    },
+    {
+      dateLabel:'Day 3 — Mon, Aug 10', periodNote:'Period TBD', title:'Where Does a Timeline Come From?', type:'content launch',
+      open:{time:'0:00–0:12', title:'Primary vs. Secondary Source Lab (Icebreaker)', text:'Start cold, no framing lecture first — hand out the Primary vs. Secondary Source Lab packet as students walk in. "In your table groups, you\'ll find eight numbered excerpts. For each one, decide: is this primary or secondary? Write down your evidence — not just your gut, the actual clue in the text that gave it away." 7 minutes of small-group work (circulate, don\'t confirm answers — ask "what\'s your evidence?" instead), then 3 minutes cross-checking Source 3 and Source 7 specifically with a neighbor group (those are the two everyone disagrees on), then 1-minute cold-call debrief. Full facilitator script and answer key are in the companion handout. Land the point explicitly: the type of source isn\'t always obvious from content or tone alone — it\'s about when the account was created and by whom, relative to the event. This is today\'s real icebreaker — no separate warm-up needed.'},
+      agenda:[
+        {time:'0:12–0:18', title:'Syllabus Check-In (6 min)', text:'Quick review of the syllabus standards covered Day 1 — grading breakdown, the notebook/device policy, the discipline ladder. Confirm every student\'s signed/initialed acknowledgment has actually been turned in; chase down stragglers by name rather than a vague reminder to the room.'},
+        {time:'0:18–0:24', title:'Pre-Assessment Debrief (6 min)', text:'Quick group share of overall patterns from Day 2\'s pre-assessment — where the class was strong, where it wasn\'t. Keep this aggregate, not individual scores; the goal is to name what today\'s lesson is about to fix.'},
+        {time:'0:24–0:29', title:'This Week\'s 10 Terms — Notes (5 min)', text:'Consolidated term slide. Students copy all 10 into their notebook now, due Friday: Artifact, Primary Source, Secondary Source, Chronology, Archaeology, Radiocarbon Dating, Historiography, Bias, Corroboration, Causation. Fast-paced, one definition and one example each — full definitions are already primary/secondary-lab-tested from the icebreaker, so this should move quickly.'},
+        {time:'0:29–0:37', title:'Mini-Lecture Part 1: How Did People First Track Time? (8 min) — Notes', text:'Students take notes here. Egyptians built a 365-day solar calendar around 3000 BCE tied to the Nile\'s flooding; Babylonians ran a 12-month lunar calendar around the same era; the Maya ran two interlocking calendars at once. Different peoples, same problem — how do you agree on \'when.\''},
+        {time:'0:37–0:43', title:'Mini-Lecture Part 2: Charlemagne Makes It Standard (6 min)', text:'Focus beat: around 800 CE, Charlemagne pushes counting years from Jesus\'s birth (BC/AD — invented three centuries earlier by the monk Dionysius Exiguus) across Western Europe, making it the standard reference system historians still use the shape of today. It hadn\'t caught on before Charlemagne backed it. Myth to bust: the Byzantines are a common guess for who standardized this — actually the opposite, they held onto their own dating system for centuries and didn\'t adopt AD until Russia switched, in 1700. Many historians now write BCE/CE instead — same numbers, no religious framing.'},
+        {time:'0:43–0:51', title:'Mini-Lecture Part 3: Dating Things With No Written Record (8 min)', text:'In 1949, chemist Willard Libby figured out that dead organic material loses a measurable, steady amount of carbon-14 over time — test the sample, read the clock. He proved it by dating objects of already-known age (the \'Curve of Knowns\') and got them right. Anchor anecdote — link this to something students already live with: "Think about your phone\'s camera roll. Every photo has an exact timestamp attached, whether you look at it or not — that\'s a hard, precise date. But think about how you actually remember last summer: you don\'t recall timestamps, you think \'that was before Jake\'s party but after Grandma visited\' — placing things in order relative to each other, not to a calendar date. Archaeologists work both of these same ways: sometimes an object gives them a hard, precise date, like your camera roll\'s timestamp. Other times all they can tell is that one thing came before or after another based on where it was found — like how you actually remember your own summer." Only name the vocabulary (radiocarbon dating, absolute vs. relative chronology) after the anecdote lands, not before.'}
+      ],
+      activity:{time:'0:51–0:57', title:'Landing Point + Term Flip-Through (6 min)', text:'Land the closing slide explicitly: every one of today\'s beats — sourcing, calendars, standardization, radiocarbon dating — is the same solution to the same problem: people needed an agreed-upon, documented record before they could learn from what came before. Then a fast flip through the one-by-one term slides as a final visual pass before Friday\'s quiz — no need to stop on each one, just resurface them.'},
+      close:{time:'final 2 min', text:'"Tonight\'s homework: find one real object or document at home — a photo, a letter, a receipt, a text thread, even a story someone told you — and figure out two things: is it a primary or secondary source, and can you pin down its exact date, or only its order relative to other things you remember? Bring your answer in writing tomorrow." Reminder: no class Friday, but the Monday-10 quiz is still Day 7 — plenty of runway, no need to cram tonight.'}
+    },
+    {
+      dateLabel:'Day 4 — date TBD pending your confirmed schedule', periodNote:'Period TBD', title:'Reading a Story from the Past + Who Was Ötzi?', type:'skills practice',
+      open:{time:'0:00–0:05', title:'Source Pair Read (part 1)', text:'Give students one primary and one secondary source on the same small historical event. In pairs: what does each source claim, where do they agree, where do they diverge, and why might that be — bias, purpose, distance from the event?'},
+      agenda:[
+        {time:'0:05–0:06', title:'Setup: Who Was Ötzi? (1 min)', text:'"I\'m going to give you evidence about a real body found in the mountains — one piece at a time. After each piece, write one sentence: who was this person, and how did he die? Don\'t cross out old guesses — I want to see your thinking change, round by round." Hand out only Round 1. Tell them explicitly: "Every round is going to make you more confident, right up until one of them doesn\'t."'},
+        {time:'0:06–0:09', title:'Round 1: The Discovery (3 min)', text:'1991, two German hikers, a body in the melting ice of the Ötztal Alps. Everyone on scene assumed a modern mountaineer. Students write their first theory. Close the round on a question, out loud: "Nothing here tells us he\'s not modern. So why am I about to tell you he isn\'t?" Don\'t answer it — hand out Round 2.'},
+        {time:'0:09–0:12', title:'Round 2: Radiocarbon Dating (3 min)', text:'Lab testing dates him to ~3300 BCE — about 5,300 years old, Copper Age, over a thousand years before Giza. This is the pivot the whole activity depends on: everything from Round 1 has to be thrown out and rebuilt. Land it explicitly: "Notice what just happened — one piece of evidence didn\'t add to your theory, it broke it." Cliffhanger forward: "So if he\'s not a lost hiker... what was a 5,300-year-old man doing alone, this high up?"'},
+        {time:'0:12–0:15', title:'Round 3: His Equipment (3 min)', text:'A copper axe — rare, high-status — plus an unfinished bow and 14 arrows, only 2 finished. This answers the Round 2 cliffhanger and opens a new one: he wasn\'t just surviving up there, he was equipped, mid-task, maybe mid-journey. "Someone this well-equipped doesn\'t just wander up a mountain and die by accident. Keep that thought — we\'re coming back to it."'},
+        {time:'0:15–0:18', title:'Round 4: His Body\'s Own Clues (3 min)', text:'61 tattoos clustered at arthritic joints, his last two meals identified, even the season of death pinned down by pollen. Push for precision here — by this round, "he died of exposure" is no longer an acceptable theory on its own; it needs a when, a what-he-was-doing, a why-there. This is the most confident the room will feel. Say so directly: "This is the most sure you\'re going to be all period. Remember that feeling."'},
+        {time:'0:18–0:20', title:'Round 5: The Wound (2 min) — The Turn', text:'For a full decade, real scientists believed exactly what most of the room now believes: exposure, a storm, an accident. Then in 2001, a second look at the CT scans found an arrowhead lodged in his shoulder, missed for ten years — plus a defensive wound on his hand. Slow all the way down here. Ask directly: "How many of you had \'exposure\' or something close as your theory right before this?" Most hands go up. Say it plainly: "You just did, in three minutes, what it took real researchers a decade to do — and got it wrong the same way they did, for the same reason: you trusted the evidence you had, and the evidence was incomplete."'},
+        {time:'0:20–0:22', title:'Round 6: Modern DNA Analysis (2 min)', text:'Genetic sequencing has since found living relatives in the region, health risks he carried, and — as recently as 2023 — revised his likely skin tone from earlier reconstructions. Land the throughline one more time: this isn\'t ancient history catching up to modern science once. It\'s still happening. The story changed in 2001, and it changed again in 2023.'}
+      ],
+      activity:{time:'0:22–0:29', title:'Reveal + Debrief (7 min)', text:'Confirm this is Ötzi the Iceman. Ask the room to look back at their Round 1 answer and their Round 5 answer side by side — how far did the theory travel, and which single round did the most damage to their previous confidence? Land the point explicitly, using their own reversal as the proof: gathering evidence isn\'t a one-time event. Even trained scientists completely revise their conclusions as new evidence comes in — that\'s not a failure of the process, that\'s the process working, and the room just lived it. Full evidence cards and script are in the companion handout.'},
+      close:{time:'final 3 min', text:'"Next class is your first quiz — just this week\'s 10 terms, plus a couple of questions on the points system itself. Look over your notes tonight, it\'s a short list."'}
+    },
+    {
+      dateLabel:'Day 5 — date TBD pending your confirmed schedule', periodNote:'Period TBD', title:'Quiz Day', type:'assessment',
+      open:{time:'0:00–0:05', title:'Partner Self-Quiz', text:'Quiet warm-up: students quiz each other in pairs for 5 minutes using their own notes. No new material introduced.'},
+      agenda:[
+        {time:'0:05–0:25', title:'Quiz (20 min)', text:'This week\'s 10-term quiz, plus 2–3 questions on the points system itself (a point value, a ladder step) — expectations get tested, not just assumed.'},
+        {time:'0:25–0:40', title:'Personal Timeline Work Time (15 min)', text:'Students work on their Personal Timeline project (an illustrated timeline of their own life, annotated for primary vs. secondary sourcing) — due before Week 2 begins.'},
+        {time:'0:40–0:55', title:'Preview Week 2 (15 min)', text:'Introduce Geography \u0026 the Sweep of History: map skills, the geography → economy → society chain, and the partner project — a 5-slide recap of what students remember from last year. Assign partners now if you can, so students have the weekend to think about it.'}
+      ],
+      activity:{time:'0:25–0:40', title:'Personal Timeline Work Time', text:'See agenda above.'},
+      close:{time:'final 5 min', text:'"That closes out our first real week. Monday we start thinking like geographers — bring your notebook, we\'re drawing maps."'}
+    }
+  ]
+},
+
+{n:2, unit:'foundations', unitLabel:'Launch — Foundations', label:'Geography & the Sweep of History to Today', meta:'Custom unit, built with your own supplemental materials — map skills, the geography → economy → society chain, and a partner recap project. Textbook begins next week.', quiz:true, test:true,
+  terms:[
+    ['Absolute Location','A precise, fixed position on Earth, typically given as latitude and longitude.'],
+    ['Relative Location','A location described in relation to other places.'],
+    ['Latitude','Lines running east-west that measure distance north or south of the equator.'],
+    ['Longitude','Lines running north-south that measure distance east or west of the prime meridian.'],
+    ['Topography','The physical shape and features of the land\'s surface.'],
+    ['Region','An area defined by one or more shared characteristics, physical or human.'],
+    ['Cultural Diffusion','The spread of cultural beliefs and practices from one group or place to another.'],
+    ['Cartography','The science and practice of making maps.'],
+    ['Scale (Map)','The relationship between distance on a map and actual distance on the ground.'],
+    ['Human-Environment Interaction','The ways people affect and are affected by their physical surroundings.']
+  ],
+  script:[
+    ['Mon','Why Maps Lie','Intro to map projections and distortion (start with a Mercator vs. equal-area comparison) — sets up why standardized, unbiased geographic reference systems matter. Introduce this week\'s 10 terms.'],
+    ['Tue','Coordinates, Scale & the Sweep of History','Hands-on: students locate real places using latitude/longitude and practice reading map scale and legends. Close with a framing discussion — why this course keeps working backward from the present, and how what they learned last year sets the stage for it. Launch the partner project.'],
+    ['Wed','Partner Project Work Day','In pairs, students build their 5-slide recap of material remembered from last year, using the simple rubric: what happened, and what it caused.'],
+    ['Thu','Partner Presentations + Geography → Economy → Society','Students present their 5-slide recaps. Close by tracing the geography → economy → society chain on one place a presentation mentioned, then running the same three-step chain live on a place students know today.'],
+    ['Fri','Test Day','Foundations Test — covers Weeks 1–2 (historiography, timeline, and this week\'s geography vocabulary). Last stop before the textbook begins next week.']
+  ],
+  primarySource:{tag:'suggested', title:'Comparing Two World Maps', source:'A period map (e.g., a 17th–18th century world map) alongside a modern political map', task:'Students identify what\'s missing, distorted, or unknown on the older map and discuss how mapmaking reflected the limits of the mapmaker\'s knowledge.'},
+  project:{title:'"What Happened, What It Caused" Partner Recap', task:'In pairs, students build a 5-slide presentation on material they remember from last year — one slide per major event or civilization, each answering two questions with a simple rubric: what happened, and what it caused. Presented to the class as the bridge from last year into this course.'}
+},
+
+{n:3, unit:'revolutions', unitLabel:'Unit 4 — Age of Revolutions', label:'Political Revolutions & Their Legacies', meta:'Ch. 15, pp. 220–237 — Compelling Question: \"How were political revolutions during the 1700s and 1800s similar and different?\"', quiz:true, test:false,
+  terms:[
+    ['Natural Rights','Rights believed to belong to all people simply by being human (e.g., life, liberty, property).'],
+    ['Social Contract','The idea that government derives its authority from an agreement among the governed.'],
+    ['Separation of Powers','Dividing government authority among branches to prevent any one from dominating.'],
+    ['Heliocentrism','Copernicus and Galileo\'s model of the universe with the sun, not Earth, at the center — a direct challenge to older authority.'],
+    ['Limited Monarchy','A monarchy whose power is restricted by law or a representative body.'],
+    ['Enlightenment','An 18th-century movement emphasizing reason, individual rights, and questioning traditional authority.'],
+    ['Philosophe','A French Enlightenment thinker/writer who applied reason to social and political questions.'],
+    ['Popular Sovereignty','The principle that governmental power comes from the consent of the people.'],
+    ['Checks and Balances','A system where each branch of government can limit the powers of the others.'],
+    ['Scientific Method','A systematic approach to inquiry developed by Bacon, Descartes, Galileo, and others, based on observation and experiment.']
+  ],
+  script:[
+    ['Mon','From Philosophy to Revolution','Introduce Hobbes, Locke, Montesquieu, Voltaire, Rousseau — connect each thinker to a specific later revolution. Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Discussion','Core chapter reading; Socratic seating on "which Enlightenment idea was most dangerous to a king?"'],
+    ['Wed','Primary Source Day','Excerpts from Locke and Rousseau (or the book\'s own primary source quotations, e.g. Locke\'s Lowering of Interest, p. 154). Students trace a direct line from text to a real revolutionary document.'],
+    ['Thu','Revolution Comparison Setup','Launch the comparison project (see below) — assign French/Haitian/American groups.'],
+    ['Fri','Quiz Day','10-term quiz on Enlightenment vocabulary and thinkers.']
+  ],
+  primarySource:{tag:'textbook', title:'Enlightenment Primary Source Quotations', source:'History Alive!, pp. 154, 213, 225 (Locke, Paine, and related excerpts)', task:'Students match each excerpt to the Enlightenment principle it demonstrates and to a revolution it later influenced.'},
+  project:{title:'Which Revolution Shaped Rights Most?', task:'Small groups research the American, French, and Haitian Revolutions and debate which most shaped modern rights language — structured debate format, not parallel lecture.'}
+},
+
+{n:4, unit:'revolutions', unitLabel:'Unit 4', label:'The Industrial Revolution', meta:'Ch. 16, pp. 238–249 — Compelling Question: \"What was so revolutionary about the Industrial Revolution?\"', quiz:true, test:false,
+  terms:[
+    ['Industrial Revolution','The shift from hand production to machine-based manufacturing beginning in 18th-century Britain.'],
+    ['Factory System','A method of production centralizing workers and machines under one roof.'],
+    ['Urbanization','The growth of cities as populations shift from rural to urban areas.'],
+    ['Capital','Wealth or resources used to produce more wealth.'],
+    ['Entrepreneur','A person who organizes and assumes the risk of a business venture.'],
+    ['Mechanization','The replacement of human/animal labor with machines.'],
+    ['Cottage Industry','Small-scale production done in homes, common before factories.'],
+    ['Steam Engine','A machine converting steam pressure into mechanical work, central to early industry.'],
+    ['Division of Labor','Breaking production into specialized tasks performed by different workers.'],
+    ['Spinning Jenny \u0026 Power Loom','Named textile inventions (with the flying shuttle and cotton gin) that mechanized cloth production and triggered the factory system.']
+  ],
+  script:[
+    ['Mon','Why Britain First','Mini-lecture on the geographic/economic preconditions for industrialization. Introduce this week\'s 10 terms.'],
+    ['Tue','Data Reading','Students read the book\'s own population growth and cotton production graphs (p. 249) and describe the trend in their own words.'],
+    ['Wed','Primary Source Day','Contrast a factory owner\'s account with a worker\'s account of factory conditions.'],
+    ['Thu','Machine Timeline','Students build a short illustrated timeline of key inventions (flying shuttle, spinning jenny, steam engine) and their downstream effects.'],
+    ['Fri','Quiz Day','10-term quiz.']
+  ],
+  primarySource:{tag:'textbook', title:'Industrial Revolution Graphs', source:'History Alive!, p. 249 (population, cotton, iron, coal charts)', task:'Students read the charts as evidence and write two claims the data supports.'},
+  project:{title:'Invention Pitch', task:'Students "pitch" one Industrial Revolution invention to a mock 1800s investor, explaining the problem it solves and its likely social impact.'}
+},
+
+{n:5, unit:'revolutions', unitLabel:'Unit 4', label:'Consequences of Industrialization', meta:'Ch. 17, pp. 250–261 — Compelling Question: \"What impacts did the Industrial Revolution have on society and the environment?\"', quiz:true, test:true,
+  terms:[
+    ['Labor Union','An organization of workers formed to negotiate with employers.'],
+    ['Child Labor','The employment of children, common and largely unregulated in early industrial factories.'],
+    ['Tenement','Crowded, often substandard urban housing for the working poor.'],
+    ['Pollution','Contamination of the environment, a major byproduct of early industry.'],
+    ['Socialism','An economic system advocating collective or state ownership of production.'],
+    ['Capitalism','An economic system based on private ownership and market competition.'],
+    ['Communism','A political and economic theory advocating a classless, common-ownership society.'],
+    ['Reform','Change made to improve a system without overthrowing it.'],
+    ['Suffrage','The right to vote.'],
+    ['Handicraft Displacement','The decline of hand textile production in India, China, Japan, and Nigeria as machine-made British cotton undercut local industries.']
+  ],
+  script:[
+    ['Mon','The Cost of Progress','Frame the week\'s central tension: industrial growth vs. human cost. Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Reaction','Core reading on urban conditions; quick-write reaction before discussion.'],
+    ['Wed','Primary Source Day','Child labor testimony or a reformer\'s account (e.g., factory inspector reports) — students identify what reform each source seems to be arguing for.'],
+    ['Thu','Ideology Sort','Students sort statements into capitalist, socialist, or communist responses to industrial conditions — sets up the Russian Revolution unit ahead.'],
+    ['Fri','Test Day','Unit 4 Test — covers Weeks 5–7 (Political Revolutions through Consequences of Industrialization).']
+  ],
+  primarySource:{tag:'suggested', title:'Factory Inspector or Child Worker Testimony', source:'A 19th-century factory conditions account', task:'Students identify the specific reform the source is implicitly or explicitly arguing for.'},
+  project:{title:'Reformer\'s Pamphlet', task:'Students design a one-page reform pamphlet (child labor laws, sanitation, union rights) in the voice of a 19th-century reformer.'}
+},
+
+{n:6, unit:'revolutions', unitLabel:'Unit 4', label:'Industrialization\'s Impact on Global Revolutions', meta:'Ch. 18, pp. 262–275 — Compelling Question: \"How did the Industrial Revolution create the conditions for global revolutions?\"', quiz:true, test:false,
+  terms:[
+    ['Caudillo','A Latin American military strongman ruler.'],
+    ['Hacienda','A large landed estate in Spanish America, often worked by peasant labor.'],
+    ['Peon','A laborer bound by debt or legal obligation to work for a landowner.'],
+    ['Coup d\'État','The sudden, illegal seizure of power from a government.'],
+    ['Land Reform','The redistribution of land ownership, often to reduce inequality.'],
+    ['Oligarchy','Rule by a small, powerful group.'],
+    ['Insurgency','An organized rebellion against an established authority.'],
+    ['Junta','A military group ruling a country after seizing power.'],
+    ['Nationalization','Government takeover of private industry or property.'],
+    ['Populism','A political approach appealing to ordinary people, often against elites.']
+  ],
+  script:[
+    ['Mon','From Factories to Uprisings','Connect industrial inequality abroad to unrest in Latin America. Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Discussion','Core reading on Mexico\'s path toward revolution.'],
+    ['Wed','Investigating Primary Sources: Mexico','Use the book\'s own feature — "Why Did Mexico Move Toward Revolution in the 1900s?" (p. 272), including the Diaz interview, the Plan of San Luis Potosí, and the Zapata interview.'],
+    ['Thu','Cause-and-Effect Chain','Students build a chain diagram from industrial inequality to a specific Latin American revolution.'],
+    ['Fri','Quiz Day','10-term quiz.']
+  ],
+  primarySource:{tag:'textbook', title:'Why Did Mexico Move Toward Revolution in the 1900s?', source:'History Alive! Investigating Primary Sources, p. 272 (Diaz interview, Plan of San Luis Potosí, Zapata interview)', task:'Students build a claim about the causes of the Mexican Revolution using competing primary voices — Diaz, Madero, and Zapata.'},
+  project:{title:'Revolution Newsreel Script', task:'Students script a 60-second "newsreel" narrating one Latin American revolution for a 1910s audience.'}
+},
+
+{n:7, unit:'revolutions', unitLabel:'Unit 4', label:'Imperialism Throughout the World', meta:'Ch. 19, pp. 276–291 — Compelling Question: \"How did a few nations come to control so much of the globe?\"', quiz:true, test:false,
+  terms:[
+    ['Imperialism','The policy of extending a nation\'s power through territorial or economic control of other regions.'],
+    ['Colony','A territory controlled by and dependent on a foreign power.'],
+    ['Protectorate','A territory controlled by a stronger power while nominally retaining its own government.'],
+    ['Sphere of Influence','An area where a foreign power has exclusive trade or investment rights, without formal control.'],
+    ['Scramble for Africa','The rapid colonization of nearly all of Africa by European powers in the late 19th century.'],
+    ['Social Darwinism','The misapplication of natural selection to justify imperial domination of other peoples.'],
+    ['Indirect Rule','A colonial administration method governing through existing local leaders.'],
+    ['Direct Rule','A colonial administration method governing with foreign officials replacing local leadership.'],
+    ['The Great Game','The strategic rivalry between Britain and Russia for influence in Central and South Asia.'],
+    ['Accommodation vs. Resistance','Two contrasting colonial-era responses — such as Zanzibar\'s accommodation of imperial powers versus Zulu armed resistance.']
+  ],
+  script:[
+    ['Mon','The Scramble','Use the book\'s Africa 1850 vs. Africa 1914 maps (p. 287) side by side — students describe the change in one sentence. Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Discussion','Core reading on the causes and methods of imperialism.'],
+    ['Wed','Primary Source Day','Kipling\'s "White Man\'s Burden" (p. 252) alongside a colonized perspective if available — students identify whose voice is missing from the imperial justification.'],
+    ['Thu','Map-Redrawing Exercise','Students overlay a map of African ethnic/linguistic groups against 1914 colonial borders — direct setup for the artificial-borders material later in the year.'],
+    ['Fri','Quiz Day','10-term quiz.']
+  ],
+  primarySource:{tag:'textbook', title:'"White Man\'s Burden," Rudyard Kipling, 1899', source:'History Alive! Primary Source Quotations, p. 252', task:'Students identify the argument the poem makes and evaluate whose perspective is absent from it.'},
+  project:{title:'Border Overlay Map', task:'Students overlay ethnic/linguistic boundaries against actual colonial borders on a blank Africa map — the same exercise that reappears in Week 26 (Movements Toward Independence).'}
+},
+
+{n:'R1', unit:'revolutions', unitLabel:'Research Project — Semester 1', label:'Tracing a Current Issue', meta:'In-class research project — gather, evaluate, wipe, build slides, present', quiz:false, test:false,
+  terms:[
+    ['CRAAP Test','A source-evaluation method checking Currency, Relevance, Authority, Accuracy, and Purpose.'],
+    ['Currency','How recent and up to date a source is.'],
+    ['Relevance','How directly a source relates to the question being researched.'],
+    ['Authority','The credibility and expertise of a source\'s author or publisher.'],
+    ['Accuracy','Whether a source\'s claims are supported by evidence and free of errors.'],
+    ['Purpose','The reason a source was created, and whether that reason introduces bias.'],
+    ['Citation','A formal reference identifying where a piece of information came from.'],
+    ['Plagiarism','Presenting someone else\'s work or ideas as your own without credit.'],
+    ['Root Cause','The original, underlying reason an event or issue exists, as opposed to its symptoms.'],
+    ['Correlation vs. Causation','The distinction between two things occurring together and one actually causing the other.']
+  ],
+  script:[
+    ['Mon','Research Skills Launch','Model the CRAAP test on the board using a sample source. Introduce this week\'s 10 terms. Students select their current issue.'],
+    ['Tue','Gather','Entirely in class: students use AI tools to gather roughly 35 facts about their chosen current issue.'],
+    ['Wed','Evaluate & Cite','Students run each source through the CRAAP test, build a working citation list, and sketch a slide outline (problem today → historical root cause → why it matters).'],
+    ['Thu','Root Cause Mapping','Students trace their 35 facts backward to identify the historical cause they will argue traces to their issue — this becomes their slides\' spine.'],
+    ['Fri','Wipe & Build, Then Present','Devices and notes are set aside. Students write their talking points pen-and-paper from what they\'ve internalized, build a short slide deck from those notes, and present — a fixed format this time, unlike Semester 2\'s open choice.']
+  ],
+  primarySource:{tag:'suggested', title:'CRAAP Test Practice Set', source:'A mixed set of strong and weak sources on a sample topic', task:'Students practice applying all five CRAAP criteria before turning it loose on their own research the next day.'},
+  project:{title:'Current Issue Slide Presentation', task:'A short slide presentation tracing a current issue back to its historical root cause, built from pen-and-paper talking points written from internalized research rather than copied notes — see the syllabus for the full process.'}
+},
+
+{n:8, unit:'crisis', unitLabel:'Unit 5 — A World in Crisis', label:'World War I', meta:'Ch. 20, pp. 296–317 — Compelling Question: \"Why did the Great War last so long and bring about so much change?\"', quiz:true, test:true,
+  terms:[
+    ['Nationalism','Pride in one\'s nation; patriotic feelings, ideas, and actions.'],
+    ['To Secede','To formally withdraw from an alliance or association.'],
+    ['Stalemate','A situation in which no progress can be made; a deadlock.'],
+    ['Mobilization','The process of assembling troops and supplies.'],
+    ['Ultimatum','A final command or statement of conditions.'],
+    ['Entente','An understanding or agreement between nations.'],
+    ['Armistice','A temporary end to hostilities; a cease-fire agreement.'],
+    ['Triple Entente','Russia, France, and Britain — later joined by Japan and Italy.'],
+    ['Triple Alliance','Austria-Hungary, Germany, and Italy — later joined by the Ottoman Empire and Bulgaria.'],
+    ['Autonomy','Self-government.']
+  ],
+  script:[
+    ['Mon','Your existing WWI vocabulary set', 'Use your existing "Vocabulary for World War I" document directly — it already covers this week\'s 10 terms in your own format.'],
+    ['Tue','Reading + Discussion','Use your existing "WORLD WAR I notes for WH" and "WH WWII Notes" documents to structure the causes/alliance-system lecture.'],
+    ['Wed','Primary Source Day: Art of the War','Use your existing "Art and the World Wars" document — combat art, war poetry, propaganda posters from the WWI portion.'],
+    ['Thu','Alliance Chain Reaction','Students diagram the July 1914 crisis as a chain reaction — one assassination to a continental war.'],
+    ['Fri','Test Day','Unit 5 Test, Part I — covers Weeks 7–8 (Imperialism and WWI).']
+  ],
+  primarySource:{tag:'your-doc', title:'Vocabulary for World War I', source:'Your uploaded document', task:'Already structured for direct use — the term list above is drawn from it.'},
+  project:{title:'Trench Letter', task:'Students write a letter home from a fictional soldier at the front, using at least five of this week\'s vocabulary terms correctly in context.'}
+},
+
+{n:9, unit:'crisis', unitLabel:'Unit 5 — A World in Crisis', label:'WWI Geography & Global Impact', meta:'Supplemental deep-dive — no new textbook chapter. Compelling Question: "How did the geography of the Western Front shape the war, and how did WWI redraw the map of the modern world?"', quiz:true, test:false,
+  terms:[
+    ['Trench Warfare','A style of combat fought from dug defensive trenches, most associated with the Western Front.'],
+    ['No Man\'s Land','The dangerous, unoccupied ground between two opposing trench lines.'],
+    ['Total War','A conflict in which a nation mobilizes all of its resources — military, economic, and civilian — toward the war effort.'],
+    ['Propaganda','Information, often biased or misleading, spread to promote a cause or damage an opposing one.'],
+    ['Mandate System','A League of Nations arrangement placing former Ottoman and German territories under the administration of other powers after WWI.'],
+    ['Treaty of Versailles','The 1919 peace treaty that formally ended WWI and imposed harsh terms on Germany.'],
+    ['Reparations','Payments made by a defeated nation to compensate for the damage caused by war.'],
+    ['Self-Determination','The principle that peoples have the right to choose their own political status and government.'],
+    ['Colonial Levy','Troops and resources drawn from a colonial empire to support the war effort of the ruling power.'],
+    ['Balkanization','The process by which a region or state breaks up into smaller, mutually hostile units, as happened in the Balkans after WWI.']
+  ],
+  script:[
+    ['Mon','Mapping the Western Front','Students plot the Western and Eastern Fronts, trench lines, and key battles (Verdun, the Somme) on a blank map of Europe. Introduce this week\'s 10 terms.'],
+    ['Tue','Total War & Propaganda Lab','Analyze real WWI propaganda posters/primary sources from multiple nations — a research skills day applying CRAAP-test sourcing habits to historical material.'],
+    ['Wed','The World Beyond the Trenches','Colonial troops and resources drawn into the war from across European empires — WWI as a genuinely global, not just European, conflict.'],
+    ['Thu','Redrawing the Map','The Treaty of Versailles, the Mandate System, and self-determination. Compare a pre-1914 and post-1919 map of Europe and the Middle East — connects directly to the Middle East content later in the unit.'],
+    ['Fri','Modern Connections & Quiz','10-term quiz. Close by tracing one WWI-era border decision that still shapes a conflict happening today.']
+  ],
+  primarySource:{tag:'suggested', title:'WWI Propaganda Posters (multi-nation)', source:'Library of Congress or Imperial War Museum digital collections', task:'Students compare propaganda posters from at least two different nations, identifying the emotional appeal, intended audience, and historical context of each.'},
+  project:{title:'Mapping a Redrawn World', task:'Students annotate a map showing at least three borders created or changed by WWI\'s postwar treaties, and briefly explain one modern conflict or tension connected to that border.'}
+},
+
+{n:10, unit:'crisis', unitLabel:'Unit 5', label:'The Russian Revolution', meta:'Ch. 21, pp. 318–331 — Compelling Question: \"What changes did the Russian Revolution bring about within Russia and in world affairs?\"', quiz:true, test:false,
+  terms:[
+    ['Bolshevik','A member of the revolutionary faction that seized power in Russia in 1917.'],
+    ['Proletariat','The industrial working class, in Marxist theory the class that would lead revolution.'],
+    ['Soviet','A council of workers or soldiers; later, the name of the Russian communist state.'],
+    ['Marxism','A political and economic theory holding that class struggle drives historical change.'],
+    ['Red Army','The Bolshevik military force during and after the Russian Civil War.'],
+    ['White Army','The anti-Bolshevik coalition during the Russian Civil War.'],
+    ['Collectivization','The forced consolidation of individual farms into state-controlled collective farms.'],
+    ['Five-Year Plan','A centrally planned economic program used by the USSR to rapidly industrialize.'],
+    ['Purge','The systematic removal (often violent) of perceived political enemies.'],
+    ['Cult of Personality','The use of propaganda to build an idealized, heroic public image of a leader.']
+  ],
+  script:[
+    ['Mon','From War to Revolution','Connect WWI\'s strain on Russia directly to the 1917 collapse. Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Discussion','Core reading using the book\'s "Key Events in the Russian Revolution" chart (p. 328).'],
+    ['Wed','Primary Source Day','Lenin and Stalin excerpts (Industrialization Speech, 1928) alongside Lev Kopelev\'s "The Education of a True Believer" (1980) — students compare official ideology to lived experience.'],
+    ['Thu','Communism/Fascism Bridge','Use your existing "World History- communism and fascism" comparison document — Soviet communism side, setting up the fascism half in Week 15.'],
+    ['Fri','Quiz Day','10-term quiz.']
+  ],
+  primarySource:{tag:'your-doc', title:'Communism and Fascism (comparison doc)', source:'Your uploaded document', task:'Use the communism half this week; the fascism half carries forward to Week 15.'},
+  project:{title:'Two Russias', task:'Students create a split-panel visual contrasting Bolshevik propaganda promises against a primary account of lived Soviet experience.'}
+},
+
+{n:11, unit:'crisis', unitLabel:'Unit 5 — A World in Crisis', label:'The Soviet Experiment & Its Legacy', meta:'Supplemental deep-dive — no new textbook chapter. Compelling Question: "What did the Soviet Union actually build, and how does its legacy still shape Russia and its neighbors today?"', quiz:true, test:true,
+  terms:[
+    ['Command Economy','An economic system in which the government makes all decisions about production, investment, and prices, rather than the market.'],
+    ['Politburo','The chief policymaking committee of the Communist Party, effectively the top governing body of the USSR.'],
+    ['Sovietization','The process of imposing Soviet political, economic, and social structures onto a territory or population.'],
+    ['Nomenklatura','The list of influential positions in Soviet government and industry filled by Communist Party appointees, forming a privileged class.'],
+    ['Russification','A policy encouraging or forcing non-Russian peoples within Soviet territory to adopt the Russian language and culture.'],
+    ['Dissolution','The formal breakup or ending of an organization or political union, as with the USSR in 1991.'],
+    ['Post-Soviet State','Any of the fifteen independent countries that emerged from the former Soviet Union after its 1991 breakup.'],
+    ['Near Abroad','A term used by Russia to describe the newly independent states that were once part of the Soviet Union.'],
+    ['Annexation','The act of one country forcibly taking control of another\'s territory.'],
+    ['Authoritarianism','A system of government in which power is concentrated in a leader or small group not accountable to the people.']
+  ],
+  script:[
+    ['Mon','Building the Soviet State','The geography of the USSR — the largest country on Earth, its many republics and ethnic regions. Introduce this week\'s 10 terms.'],
+    ['Tue','Command Economy & Everyday Life','How central planning shaped daily life — a research skills day analyzing a primary source (a rationing record, a Five-Year-Plan poster).'],
+    ['Wed','The Party & the Machinery of Control','The Politburo, the Nomenklatura, and Sovietization — how the USSR governed both itself and the territory it controlled.'],
+    ['Thu','1991 and After','The USSR\'s dissolution and the fifteen post-Soviet states born from it.'],
+    ['Fri','Modern Connections & Test','Unit 5 Test, Part II — covers Weeks 8–11 (WWI, WWI Geography & Global Impact, the Russian Revolution, and the Soviet Experiment). Close by connecting "near abroad" and annexation to a state students may have heard about in the news today.']
+  ],
+  primarySource:{tag:'suggested', title:'Soviet Five-Year Plan poster / rationing record', source:'Seventeen Moments in Soviet History (Michigan State University digital archive) or similar', task:'Students analyze one primary source from Soviet daily life and connect it to this week\'s command economy vocabulary.'},
+  project:{title:'Then and Now: Post-Soviet Map', task:'Students label the fifteen post-Soviet states on a blank map and research one present-day news story connected to one of those states.'}
+},
+
+{n:12, unit:'crisis', unitLabel:'Unit 5', label:'Political Revolutions in the Americas', meta:'Ch. 22, pp. 332–345 — Compelling Question: \"What were the causes and effects of political unrest in Latin America in the 19th and 20th centuries?\"', quiz:true, test:false,
+  terms:[
+    ['Monroe Doctrine','An 1823 U.S. policy opposing further European colonization in the Americas.'],
+    ['Good Neighbor Policy','A 1930s U.S. policy of non-intervention and improved relations with Latin America.'],
+    ['Banana Republic','A politically unstable country with an economy dominated by a single export.'],
+    ['Nationalization','Government takeover of private industry or property.'],
+    ['Caudillismo','A political pattern centered on rule by military strongmen.'],
+    ['Dependency','An economic condition where a country relies heavily on foreign markets or investment.'],
+    ['Intervention','Direct involvement by one country in the affairs of another, including military action.'],
+    ['Populism','A political approach appealing to ordinary people, often against elites.'],
+    ['Panama Canal Zone','The U.S.-controlled area surrounding the Panama Canal from 1903–1979.'],
+    ['Foreign Investment','Capital supplied by outside investors, often shaping a country\'s economic priorities.']
+  ],
+  script:[
+    ['Mon','U.S. Influence, Continued','Bridge from Week 6\'s Mexico material to broader U.S.-Latin American relations. Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Discussion','Core reading using the Panama Canal Zone map (p. 344).'],
+    ['Wed','Primary Source Day','A period political cartoon or speech on U.S. intervention in Latin America — students identify the perspective being advanced.'],
+    ['Thu','Case Study Stations','Short stations on 2–3 specific interventions/revolutions in the region.'],
+    ['Fri','Quiz Day','10-term quiz.']
+  ],
+  primarySource:{tag:'suggested', title:'U.S. Intervention Political Cartoon', source:'A period editorial cartoon on U.S.–Latin American relations', task:'Students identify the cartoonist\'s perspective and the specific policy being critiqued or defended.'},
+  project:{title:'Dependency Chart', task:'Students chart one Latin American country\'s major export and trace who controlled it — a foreign company, the state, or local landowners.'}
+},
+
+{n:13, unit:'crisis', unitLabel:'Unit 5', label:'North Africa and the Middle East', meta:'Ch. 23, pp. 346–369 — Compelling Question: \"How did European colonialism lay the groundwork for the emergence of the modern Middle East?\"', quiz:true, test:false,
+  terms:[
+    ['Mandate System','A League of Nations arrangement placing former Ottoman/German territories under foreign administration.'],
+    ['Self-Determination','The right of a people to choose their own political status.'],
+    ['Zionism','A movement supporting the establishment of a Jewish national homeland.'],
+    ['Pan-Arabism','A movement promoting unity among Arab nations and peoples.'],
+    ['Sykes-Picot Agreement','A secret 1916 British-French plan dividing Ottoman territory into spheres of influence.'],
+    ['Protectorate','A territory controlled by a stronger power while nominally retaining its own government.'],
+    ['Secularism','The principle of separating government from religious institutions.'],
+    ['Ottoman Decline','The gradual loss of Ottoman territory and power through the 19th–20th centuries.'],
+    ['Sovereignty','The authority of a state to govern itself.'],
+    ['Nationalism (Middle East)','Movements asserting the political independence and identity of Middle Eastern peoples.']
+  ],
+  script:[
+    ['Mon','After the Ottomans','Use the book\'s "Decline of the Ottoman Empire" and "League of Nations Mandate System" maps (pp. 349, 354). Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Discussion','Core reading on colonial groundwork for the modern Middle East.'],
+    ['Wed','Primary Source Day','Excerpt from the Sykes-Picot Agreement or a mandate-era document — students trace a present-day border back to a colonial-era decision.'],
+    ['Thu','Map Layering','Students layer the Ottoman Empire map, the mandate map, and a modern political map to see borders shift.'],
+    ['Fri','Quiz Day','10-term quiz.']
+  ],
+  primarySource:{tag:'suggested', title:'Sykes-Picot Agreement excerpt', source:'A period diplomatic document on Middle East partition', task:'Students trace a modern border or conflict back to a specific colonial-era decision in the text.'},
+  project:{title:'Border Timeline', task:'Students build a three-frame "then/then/now" map sequence for one Middle Eastern country, showing Ottoman-era, mandate-era, and present-day borders.'}
+},
+
+{n:14, unit:'crisis', unitLabel:'Unit 5', label:'Revolution and War in Asia', meta:'Ch. 24, pp. 370–387 — Compelling Question: \"How did popular movements and nationalist ideas shape Asia in the 19th and 20th centuries?\"', quiz:true, test:true,
+  terms:[
+    ['Kuomintang','The Chinese Nationalist Party, a major political-military force in early 20th-century China.'],
+    ['Long March','The 1934–35 strategic retreat of Chinese Communist forces that helped establish Mao\'s leadership.'],
+    ['Meiji Restoration','Japan\'s late-19th-century modernization and centralization under the emperor.'],
+    ['Warlord','A regional military leader exercising independent civil and military control.'],
+    ['Guerrilla Warfare','Irregular fighting using small, mobile tactics against a larger conventional force.'],
+    ['Treaty Port','A port opened to foreign trade/residence under unequal treaty terms, common in 19th-century China.'],
+    ['Self-Strengthening Movement','A 19th-century Chinese effort to modernize militarily and economically while preserving traditional values.'],
+    ['Sphere of Influence','An area where a foreign power has exclusive trade or investment rights, without formal control.'],
+    ['Nationalism (Asia)','Movements asserting the political independence and identity of Asian peoples under foreign pressure.'],
+    ['Japanese Territorial Expansion','Japan\'s early-20th-century military expansion across East Asia and the Pacific.']
+  ],
+  script:[
+    ['Mon','Two Paths to Power','Contrast China\'s internal upheaval with Japan\'s external expansion. Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Discussion','Core reading using the "Japanese Territorial Expansion, 1931–1940" map (p. 385).'],
+    ['Wed','Primary Source Day','A period account of the Long March or Meiji-era modernization — students identify what the source reveals about the cost of rapid change.'],
+    ['Thu','Cause-Effect Chain','Students chart how 19th-century treaty ports and unequal treaties set up 20th-century nationalism and conflict.'],
+    ['Fri','Test Day','Unit 5 Test, Part II — covers Weeks 10–14 (Russian Revolution through Revolution and War in Asia).']
+  ],
+  primarySource:{tag:'suggested', title:'Long March or Meiji-era account', source:'A period first-person account of rapid political/military change in China or Japan', task:'Students identify the human cost embedded in the source and connect it to the broader modernization or revolutionary movement.'},
+  project:{title:'Two Nations, One Decade', task:'Side-by-side infographic comparing China\'s and Japan\'s trajectories in the same decade.'}
+},
+
+{n:15, unit:'crisis', unitLabel:'Unit 5', label:'The Rise of Fascism and Totalitarian States', meta:'Ch. 25, pp. 388–405 — Compelling Question: \"What accounted for the rise of totalitarian states after World War I?\"', quiz:true, test:false,
+  terms:[
+    ['Fascism','An authoritarian, ultranationalist political ideology emphasizing centralized power and often militarism.'],
+    ['Totalitarianism','A system of government where the state seeks total control over public and private life.'],
+    ['Propaganda','Information, often biased, spread to promote a particular cause or point of view.'],
+    ['Cult of Personality','The use of propaganda to build an idealized, heroic public image of a leader.'],
+    ['Third Reich','The official name for Nazi Germany, 1933–1945.'],
+    ['Lebensraum','Nazi ideology\'s claim to territorial expansion for "living space."'],
+    ['Appeasement','A policy of making concessions to an aggressive power to avoid conflict.'],
+    ['Japanese Militarism','The rise of military-dominated government in Japan under leaders like Konoe and Tojo, paralleling fascism in Europe.'],
+    ['Great Depression','The severe global economic collapse of the 1930s that fueled unemployment and the rise of authoritarian leaders.'],
+    ['Treaty of Versailles (Effects)','The WWI peace settlement whose harsh terms on Germany fueled resentment and later fascist appeal.']
+  ],
+  script:[
+    ['Mon','From Chaos to Strongmen','Connect Versailles\' effects and economic collapse directly to fascism\'s appeal. Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Discussion','Use your existing "Communism and Fascism" comparison document — fascism half, plus Sections I–II of your WWII guided notes.'],
+    ['Wed','Investigating Primary Sources: Cult of Personality','Use the book\'s own feature — "How Did \'The Cult of Personality\' Shape Politics in Russia?" — bridges Stalin (Week 9) and Mussolini/Hitler (this week).'],
+    ['Thu','Propaganda Poster Analysis','Gallery walk of fascist propaganda posters — students identify the specific persuasive technique in each.'],
+    ['Fri','Quiz Day','10-term quiz.']
+  ],
+  primarySource:{tag:'textbook', title:'How Did "The Cult of Personality" Shape Politics in Russia?', source:'History Alive! Investigating Primary Sources feature, Unit 5', task:'Students build a claim about how propaganda and personality cults reinforced totalitarian control, applicable across the Stalin/Mussolini/Hitler comparison.'},
+  project:{title:'Propaganda Gallery Walk', task:'Small groups analyze assigned fascist propaganda posters and present the persuasive technique each uses to the class.'}
+},
+
+{n:16, unit:'crisis', unitLabel:'Unit 5', label:'World War II', meta:'Ch. 26, pp. 406–435 — Compelling Question: \"Why was there another global conflict so soon after World War I?\"', quiz:true, test:true,
+  terms:[
+    ['Blitzkrieg','A fast, coordinated military tactic combining air power, tanks, and infantry.'],
+    ['Axis Powers','Germany, Italy, and Japan\'s WWII alliance.'],
+    ['Allied Powers','The WWII coalition opposing the Axis, including the U.S., UK, USSR, and others.'],
+    ['Genocide','The deliberate, systematic destruction of a national, ethnic, racial, or religious group.'],
+    ['Killing Center','A Nazi facility built specifically for mass murder, distinct from a labor or concentration camp.'],
+    ['Ghetto','A segregated urban district where Nazi authorities confined Jewish populations.'],
+    ['D-Day','The June 6, 1944 Allied invasion of Normandy.'],
+    ['Manchurian Incident \u0026 Midway','Key Pacific Theater turning points — Japan\'s 1931 invasion of Manchuria and the 1942 Battle of Midway.'],
+    ['Tokyo War Crimes Tribunal','The postwar tribunal prosecuting Japanese leaders, alongside Nuremberg, for wartime atrocities including the Rape of Nanjing.'],
+    ['Pacific Theater','The WWII combat zone across the Pacific Ocean and East Asia.']
+  ],
+  script:[
+    ['Mon','The Blitzkrieg Map','Use the book\'s Blitzkrieg diagram (p. 416) and German/Italian/Japanese expansion maps. Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Discussion','Use your existing WWII guided notes (KEY WWII Notes / WH WWII Notes) to structure the war\'s major turning points.'],
+    ['Wed','The Holocaust','Use your existing "The Holocaust," "Killing Centers," and "Hitler\'s American Model?" documents — close reading of ghettoization, deportation, and extermination.'],
+    ['Thu','Art of the War, Part II','Use your existing "Art and the World Wars" document — the WWII-era portion (compare to the WWI portion used in Week 8).'],
+    ['Fri','Test Day','Unit 5 Test, Part III — covers Weeks 15–16 (Fascism and WWII).']
+  ],
+  primarySource:{tag:'your-doc', title:'The Holocaust / Killing Centers / Hitler\'s American Model?', source:'Your uploaded documents', task:'Close reading of ghettoization, deportation, and extermination — handle with the pacing and content-warning approach you already use for this material.'},
+  project:{title:'Witness Testimony Close Read', task:'Students closely read one piece of Holocaust witness testimony and write a short reflection connecting it to the week\'s vocabulary (genocide, ghetto, killing center).'}
+},
+
+{n:17, unit:'crisis', unitLabel:'Unit 5 — A World in Crisis', label:'The Holocaust & Genocide Studies', meta:'Supplemental deep-dive — no new textbook chapter. Compelling Question: "How did the Holocaust happen, and what does genocide look like since?"', quiz:true, test:false,
+  terms:[
+    ['Antisemitism','Hostility, prejudice, or discrimination directed against Jewish people.'],
+    ['Nuremberg Laws','1935 German laws that stripped Jews of citizenship and legal rights, formalizing racial persecution.'],
+    ['Kristallnacht','A November 1938 wave of violent anti-Jewish riots across Nazi Germany, marking an escalation toward the Holocaust.'],
+    ['Deportation','The forced removal of a group of people from a country or region.'],
+    ['Concentration Camp','A detention facility used to imprison civilians, often under brutal conditions, distinct from a killing center built for mass murder.'],
+    ['Resistance','Acts, armed or unarmed, by individuals or groups working against Nazi persecution.'],
+    ['Righteous Among the Nations','An honor given to non-Jews who risked their lives to save Jews during the Holocaust.'],
+    ['Nuremberg Trials','The postwar tribunals prosecuting major Nazi war criminals for crimes against humanity.'],
+    ['Genocide Convention','The 1948 United Nations treaty defining genocide and committing signatories to prevent and punish it.'],
+    ['Never Again','A phrase expressing the post-Holocaust commitment to preventing future genocides — and a standard against which later atrocities are measured.']
+  ],
+  script:[
+    ['Mon','How It Began','Antisemitism\'s long history in Europe and the Nuremberg Laws\' legal escalation toward persecution. Introduce this week\'s 10 terms.'],
+    ['Tue','Deportation & the Killing Centers','Continue with your existing "The Holocaust" and "Killing Center" documents — deportation, ghettoization, and the machinery of the killing centers, building on last week\'s introduction.'],
+    ['Wed','Voices & Resistance','Testimony and acts of resistance/rescue (Righteous Among the Nations) — a research skills day sourcing a survivor or rescuer account.'],
+    ['Thu','Accountability','The Nuremberg Trials and the 1948 Genocide Convention — connects directly to the Tokyo Tribunal covered last week.'],
+    ['Fri','Never Again? & Quiz','10-term quiz. Close by naming one genocide or mass atrocity since 1945 (Cambodia, Rwanda, Bosnia) as a modern connections discussion.']
+  ],
+  primarySource:{tag:'your-doc', title:'The Holocaust / Killing Centers (continued)', source:'Your uploaded documents', task:'Continue close reading from last week with added focus on testimony and resistance — same pacing and content-warning approach you already use.'},
+  project:{title:'Never Again, Since Then', task:'Students research one genocide or mass atrocity since 1945 and write a short brief connecting it to this week\'s vocabulary (the Genocide Convention, resistance, accountability).'}
+},
+
+{n:18, unit:'crisis', unitLabel:'Unit 5 — A World in Crisis', label:'WWII Geography, Homefront & Modern Connections', meta:'Supplemental deep-dive — no new textbook chapter. Compelling Question: "How did WWII reshape the map — and the world order — that came after it?"', quiz:true, test:true,
+  terms:[
+    ['Homefront','The civilian population and activities of a nation whose armed forces are engaged in war abroad.'],
+    ['Rationing','The controlled distribution of scarce goods, resources, or services during wartime.'],
+    ['Internment','The confinement of a group of people, often based on ethnicity or nationality, typically without trial.'],
+    ['Lend-Lease','A U.S. program supplying Allied nations with war materials before America\'s formal entry into WWII.'],
+    ['Total Mobilization','The full conversion of a nation\'s economy and society toward the war effort.'],
+    ['Yalta Conference','A February 1945 meeting of Allied leaders that shaped the postwar division of Europe.'],
+    ['Occupation Zone','A region placed under the temporary military control of a foreign power after a war.'],
+    ['Potsdam Conference','A July 1945 meeting of Allied leaders that finalized plans for postwar Germany and issued the ultimatum leading to Japan\'s surrender.'],
+    ['Demobilization','The process of standing down a nation\'s armed forces and shifting back to a peacetime economy after war.'],
+    ['War Crimes','Serious violations of the laws and customs of war, prosecutable under international law.']
+  ],
+  script:[
+    ['Mon','The Homefront','Rationing, propaganda, and mobilization in the U.S. and other nations. Introduce this week\'s 10 terms.'],
+    ['Tue','Internment & Its Legacy','Japanese American internment as a homefront case study — a research skills day evaluating a primary source (an internment order, a wartime photograph).'],
+    ['Wed','Mapping the War\'s End','Pacific and European theater maps at war\'s end; the Yalta and Potsdam Conferences and the division of occupation zones.'],
+    ['Thu','Toward a New Order','War crimes accountability and demobilization. Preview how next week\'s chapter (Cooperation in Postwar Europe) picks up from here with the UN and the Marshall Plan.'],
+    ['Fri','Modern Connections & Test','Unit 5 Final Test — covers Weeks 15–18 (Fascism, WWII, the Holocaust, and WWII Geography/Homefront) and closes out Unit 5. Close by asking whether the postwar order built in 1945 still holds today.']
+  ],
+  primarySource:{tag:'suggested', title:'WWII Homefront Rationing/Internment Records', source:'National Archives or Densho Digital Repository', task:'Students analyze one homefront-era primary source (a ration book, an internment order, a wartime poster) and connect it to this week\'s vocabulary.'},
+  project:{title:'Building the Postwar World', task:'Students create a short brief on one postwar institution or agreement (the Yalta Conference, an occupation zone, or war crimes accountability) explaining what problem it was built to solve.'}
+},
+
+{n:19, unit:'coldwar', unitLabel:'Unit 6 — The Cold War', label:'Cooperation in Post-war Europe', meta:'Ch. 27, pp. 440–447 — Compelling Question: \"What challenges did Europe face following the end of World War II?\"', quiz:true, test:false,
+  terms:[
+    ['Marshall Plan','A U.S. program providing economic aid to rebuild Western Europe after WWII.'],
+    ['United Nations','The international organization founded in 1945 to promote peace and cooperation.'],
+    ['Denazification','The Allied effort to remove Nazi influence from German society and institutions.'],
+    ['Reconstruction','The process of rebuilding a society\'s economy and institutions after war.'],
+    ['Superpower','A state with the military and economic strength to project dominant global influence.'],
+    ['Division of Germany','The post-WWII split of Germany into Western and Soviet-controlled zones.'],
+    ['NATO','A 1949 military alliance of Western nations formed to counter Soviet expansion.'],
+    ['Containment','The U.S. Cold War strategy of preventing the spread of communism.'],
+    ['Iron Curtain','The ideological and physical divide between Soviet-controlled Eastern Europe and the West.'],
+    ['Bretton Woods','The 1944 agreement establishing the post-war international monetary system.']
+  ],
+  script:[
+    ['Mon','Rebuilding From Ruins','Bridge directly from WWII\'s end into occupied, divided Europe. Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Discussion','Core reading on the UN\'s founding and early reconstruction efforts.'],
+    ['Wed','Primary Source Day','The UN Charter\'s founding language alongside a Marshall Plan speech excerpt — students identify the vision of world order each proposes.'],
+    ['Thu','Divided Germany Map Lab','Students map the occupation zones and trace how they hardened into East/West Germany.'],
+    ['Fri','Quiz Day','10-term quiz.']
+  ],
+  primarySource:{tag:'suggested', title:'UN Charter / Marshall Plan speech excerpt', source:'Founding-era diplomatic documents', task:'Students identify the vision of postwar order each document proposes and where those visions conflict.'},
+  project:{title:'Rebuild or Contain?', task:'Students role-play as U.S. and Soviet policymakers debating how to handle occupied Germany — a light warm-up for the Cold War simulation ahead.'}
+},
+
+{n:20, unit:'coldwar', unitLabel:'Unit 6', label:'The Cold War Begins', meta:'Ch. 28, pp. 448–465 — Compelling Question: \"How did the United States and the Soviet Union become Cold War adversaries?\"', quiz:true, test:false,
+  terms:[
+    ['Cold War','The prolonged geopolitical tension between the U.S. and USSR without direct large-scale conflict.'],
+    ['Containment','The U.S. Cold War strategy of preventing the spread of communism.'],
+    ['Truman Doctrine','The 1947 U.S. policy pledging support to nations resisting communist takeover.'],
+    ['Arms Race','A competitive buildup of military weapons between rival powers.'],
+    ['Deterrence','A strategy of preventing attack by maintaining the capability for devastating retaliation.'],
+    ['Satellite State','A nominally independent country under the heavy political/economic influence of a larger power.'],
+    ['Espionage','The practice of spying to gather secret information.'],
+    ['Warsaw Pact','The 1955 Soviet-led military alliance countering NATO.'],
+    ['Ideology','A structured set of political or economic beliefs guiding a movement or state.'],
+    ['Superpower Rivalry','Competition for global influence between the era\'s two dominant states.']
+  ],
+  script:[
+    ['Mon','Two Blocs','Map NATO vs. Warsaw Pact — visually establish the divided world this unit lives in. Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Discussion','Core reading using the Truman Doctrine and Marshall Plan primary documents (pp. 462, 464).'],
+    ['Wed','Investigating Primary Sources: Cold War','Use the book\'s own feature — "How Was the Cold War Waged All over the World?" (p. 462).'],
+    ['Thu','Doctrine Comparison','Students compare the Truman Doctrine text to the Warsaw Pact text (p. 465) and identify each bloc\'s stated justification.'],
+    ['Fri','Quiz Day','10-term quiz.']
+  ],
+  primarySource:{tag:'textbook', title:'How Was the Cold War Waged All over the World?', source:'History Alive! Investigating Primary Sources, p. 462 (Truman Doctrine, Marshall Plan, Warsaw Pact)', task:'Students build a claim about how Cold War competition extended beyond Europe using the featured primary sources.'},
+  project:{title:'Bloc Recruitment Pitch', task:'Students write a short "recruitment pitch" a NATO or Warsaw Pact representative might give to a non-aligned nation.'}
+},
+
+{n:21, unit:'coldwar', unitLabel:'Unit 6', label:'Conflicts of the Cold War', meta:'Ch. 29, pp. 466–479 — Compelling Question: \"How did the Cold War affect Third World nations?\"', quiz:true, test:true,
+  terms:[
+    ['Proxy War','A conflict where major powers support opposing sides without direct combat against each other.'],
+    ['Domino Theory','The Cold War belief that one nation falling to communism would trigger neighboring nations to follow.'],
+    ['Non-Aligned Movement','A group of states declining formal alignment with either Cold War superpower bloc.'],
+    ['Third World','Cold War-era term for developing nations not formally aligned with either superpower bloc.'],
+    ['Brinkmanship','The practice of pushing a dangerous situation to the edge of conflict to force an opponent to back down.'],
+    ['Covert Operation','A secret action carried out by a government, often without public acknowledgment.'],
+    ['Insurgency','An organized rebellion against an established authority.'],
+    ['Guerrilla Warfare','Irregular fighting using small, mobile tactics against a larger conventional force.'],
+    ['Superpower Competition','Rivalry for global influence extending into regional and local conflicts.'],
+    ['Sphere of Influence','An area where a foreign power has exclusive trade or investment rights, without formal control.']
+  ],
+  script:[
+    ['Mon','The Cold War Goes Global','Use the book\'s Guatemala, Cuba, Chile, Vietnam, and Indonesia maps (pp. 471–476, 513) to show how the rivalry played out far from Europe. Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Discussion','Core reading on proxy conflicts and covert operations.'],
+    ['Wed','Primary Source Day','A domino theory speech excerpt — students evaluate the logic and identify where it held or failed historically.'],
+    ['Thu','Case Study Stations','Short stations on 2–3 proxy conflicts (Vietnam, Cuba, or another the book covers).'],
+    ['Fri','Test Day','Unit 6 Test, Part I — covers Weeks 19–21 (Post-war Cooperation through Conflicts of the Cold War).']
+  ],
+  primarySource:{tag:'suggested', title:'Domino Theory speech excerpt', source:'A Cold War-era policy speech invoking the domino theory', task:'Students evaluate the theory\'s logic and test it against a specific historical case the class has studied.'},
+  project:{title:'Proxy War Case File', task:'Students build a short "case file" on one proxy conflict — who backed whom, why, and the outcome.'}
+},
+
+{n:22, unit:'coldwar', unitLabel:'Unit 6 — The Cold War', label:'The Nuclear Age & the Arms Race', meta:'Supplemental deep-dive — no new textbook chapter. Compelling Question: "How did the threat of nuclear weapons shape Cold War decisions — and does that logic still apply today?"', quiz:true, test:false,
+  terms:[
+    ['Mutually Assured Destruction','A doctrine holding that neither superpower would launch a nuclear first strike because the retaliation would destroy both (MAD).'],
+    ['Nuclear Proliferation','The spread of nuclear weapons technology to nations that did not previously possess it.'],
+    ['Fallout','The radioactive particles that fall to Earth after a nuclear explosion, causing lasting environmental and health harm.'],
+    ['Missile Gap','The (often exaggerated) perceived imbalance in nuclear missile capability between the U.S. and USSR.'],
+    ['Test Ban Treaty','An agreement restricting or prohibiting the testing of nuclear weapons, such as the 1963 Partial Test Ban Treaty.'],
+    ['Space Race','The Cold War competition between the U.S. and USSR to achieve superior spaceflight capability.'],
+    ['Civil Defense','Government and civilian measures (drills, shelters) intended to protect the population in the event of an attack.'],
+    ['Cuban Missile Crisis','The October 1962 confrontation over Soviet nuclear missiles in Cuba, considered the closest the Cold War came to direct nuclear conflict.'],
+    ['Hotline','A direct communication link established between Washington and Moscow after the Cuban Missile Crisis to reduce the risk of accidental war.'],
+    ['Nonproliferation Treaty','A 1968 international agreement aimed at preventing the spread of nuclear weapons and technology.']
+  ],
+  script:[
+    ['Mon','The Logic of MAD','Why having the most destructive weapons in history made both superpowers more cautious, not less. Introduce this week\'s 10 terms.'],
+    ['Tue','Thirteen Days','A close case study of the Cuban Missile Crisis using primary source communications between Kennedy and Khrushchev — a research skills day.'],
+    ['Wed','The Space Race','Sputnik, Apollo, and spaceflight as a Cold War proxy competition — connecting nuclear-capable rocket technology to prestige competition.'],
+    ['Thu','Living Under the Bomb','Civil defense drills, fallout shelters, and how ordinary families experienced nuclear anxiety — primary source analysis of a period civil defense film or pamphlet.'],
+    ['Fri','Modern Connections & Quiz','10-term quiz. Close by asking which nations possess nuclear weapons today and whether MAD-style logic still applies to them.']
+  ],
+  primarySource:{tag:'suggested', title:'Cuban Missile Crisis correspondence (Kennedy–Khrushchev letters)', source:'JFK Presidential Library digital archives', task:'Students read excerpts from the Kennedy–Khrushchev correspondence and identify the moment of greatest de-escalation.'},
+  project:{title:'Thirteen Days, One Decision', task:'Students choose one decision point from the Cuban Missile Crisis and write a short brief on what a different choice might have changed, grounded in this week\'s vocabulary.'}
+},
+
+{n:23, unit:'coldwar', unitLabel:'Unit 6', label:'The End of the Cold War', meta:'Ch. 30, pp. 480–489 — Compelling Question: \"What led to the end of the Cold War?\"', quiz:true, test:false,
+  terms:[
+    ['Glasnost','Gorbachev\'s policy of increased political openness in the USSR.'],
+    ['Perestroika','Gorbachev\'s policy of economic restructuring in the USSR.'],
+    ['Détente','A period of eased tension between the U.S. and USSR.'],
+    ['Solidarity Movement','A Polish anti-communist trade union movement that helped erode Soviet control.'],
+    ['Berlin Wall','The barrier dividing East and West Berlin, 1961–1989, symbolizing the Cold War divide.'],
+    ['Reunification','The 1990 merging of East and West Germany into a single state.'],
+    ['Arms Reduction','Negotiated decreases in a nation\'s military weapons stockpiles.'],
+    ['Dissident','A person who openly opposes official government policy.'],
+    ['Collapse of the USSR','The 1991 dissolution of the Soviet Union into independent states.'],
+    ['Iron Curtain (Fall)','The end of the ideological/physical divide between Eastern and Western Europe.']
+  ],
+  script:[
+    ['Mon','Cracks in the System','Frame Gorbachev\'s reforms as the beginning of the end. Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Discussion','Core reading on glasnost, perestroika, and the Solidarity movement.'],
+    ['Wed','Primary Source Day','A Reagan-Gorbachev summit excerpt or Solidarity movement statement — students identify the shift in tone from earlier Cold War rhetoric.'],
+    ['Thu','1989 Timeline','Students build a rapid timeline of 1989–1991 (Berlin Wall to USSR collapse) — emphasizes how fast the collapse actually was.'],
+    ['Fri','Quiz Day','10-term quiz.']
+  ],
+  primarySource:{tag:'suggested', title:'Reagan-Gorbachev summit or Solidarity statement', source:'A late-Cold-War diplomatic or dissident-movement document', task:'Students identify the shift in tone from earlier Cold War rhetoric and what it signals about the balance of power.'},
+  project:{title:'1989 Newsroom', task:'Students produce a short "breaking news" segment script covering one 1989–1991 event as it would have broken live.'}
+},
+
+{n:24, unit:'coldwar', unitLabel:'Unit 6 — The Cold War', label:'Cold War Legacies: From the USSR to Today', meta:'Supplemental deep-dive — no new textbook chapter. Compelling Question: "Did the Cold War really end in 1991 — or did it just change shape?"', quiz:true, test:false,
+  terms:[
+    ['Post-Cold War Order','The international system that emerged after the USSR\'s collapse, often described as U.S.-led unipolarity.'],
+    ['NATO Expansion','The post-1991 growth of NATO membership into formerly Soviet-aligned Eastern Europe.'],
+    ['Frozen Conflict','A conflict that has paused without a formal peace agreement, leaving tensions unresolved indefinitely.'],
+    ['Hybrid Warfare','A strategy combining conventional military force with cyberattacks, disinformation, and other non-traditional tactics.'],
+    ['Sanctions','Economic or political penalties imposed by one country or group of countries on another to influence its behavior.'],
+    ['Sphere of Influence','A region where one power exerts significant political, economic, or military influence without direct control.'],
+    ['Multipolarity','An international system in which power is distributed among several major states rather than one or two dominant ones.'],
+    ['Disinformation','False or misleading information deliberately spread to deceive.'],
+    ['Energy Leverage','The use of a nation\'s oil, gas, or other energy resources as a tool of political or economic pressure.'],
+    ['"New Cold War"','A term used by some analysts to describe renewed great-power tension resembling the original Cold War\'s dynamics.']
+  ],
+  script:[
+    ['Mon','1991 and the "End" of History','Reactions to the Soviet collapse and the (short-lived) idea that great-power conflict was over. Introduce this week\'s 10 terms.'],
+    ['Tue','NATO\'s Eastward Expansion','Mapping NATO membership growth since 1991 and how it\'s viewed differently in Washington and Moscow — a research skills day.'],
+    ['Wed','Frozen Conflicts & Hybrid Warfare','Case studies of unresolved post-Soviet tensions and how modern conflict blends military and non-military tools.'],
+    ['Thu','Sanctions & Energy Leverage','How economic tools have replaced — or supplemented — direct confrontation.'],
+    ['Fri','Modern Connections & Quiz','10-term quiz. Close by asking students whether "New Cold War" fairly describes any relationship in the news today.']
+  ],
+  primarySource:{tag:'suggested', title:'NATO membership map, 1991–present', source:'NATO.int official membership timeline', task:'Students trace NATO\'s membership growth since 1991 and identify which additions were most contested.'},
+  project:{title:'Cold War or Not?', task:'Students pick one current international tension and argue, using at least four of this week\'s vocabulary terms, whether "Cold War" is an accurate description of it or a misleading one.'}
+},
+
+{n:25, unit:'coldwar', unitLabel:'Unit 6', label:'Shifts of Power in the Middle East', meta:'Ch. 31, pp. 490–505 — Compelling Question: \"Why is the Middle East a flashpoint in world affairs?\"', quiz:true, test:true,
+  terms:[
+    ['Six-Day War','A brief 1967 war after which Israel occupied significant additional territory.'],
+    ['OPEC','The Organization of the Petroleum Exporting Countries, coordinating oil policy among member states.'],
+    ['Iranian Revolution','The 1979 revolution that replaced Iran\'s monarchy with an Islamic republic.'],
+    ['Theocracy','A government ruled by or subject to religious authority.'],
+    ['Camp David Accords','A 1978 peace agreement framework between Israel and Egypt.'],
+    ['Gulf War','A 1990–91 conflict following Iraq\'s invasion of Kuwait.'],
+    ['Oil Embargo','A deliberate restriction on oil sales used as economic/political leverage.'],
+    ['Sectarianism','Conflict or division rooted in religious or ethnic sect identity.'],
+    ['Regime Change','The forcible or externally driven replacement of a country\'s government.'],
+    ['UN Partition Plan','The 1947 UN proposal to divide Mandate Palestine into separate states.']
+  ],
+  script:[
+    ['Mon','After the Mandates','Bridge back to Week 13\'s mandate-system material — show how those borders produced this unit\'s conflicts. Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Discussion','Core reading using the UN Partition Plan and Six-Day War maps (pp. 492, 494, 497).'],
+    ['Wed','Primary Source Day','The UN Partition Plan map alongside a period statement from each side — students identify competing claims to the same territory.'],
+    ['Thu','Persian Gulf Case Study','Use the book\'s Persian Gulf map (p. 502) for the Gulf War case study.'],
+    ['Fri','Test Day','Unit 6 Final Test — covers Weeks 23–25 (End of the Cold War, Cold War Legacies, and the Middle East) and closes out Unit 6.']
+  ],
+  primarySource:{tag:'textbook', title:'UN Plan for the Partition of Palestine, 1947', source:'History Alive! map feature, p. 492', task:'Students compare the 1947 partition plan to the 1967 post-war territory map (p. 494) and describe what changed and why.'},
+  project:{title:'Competing Claims Map', task:'Students annotate a single map with the competing territorial claims presented by two sides in one Middle East conflict studied this week.'}
+},
+
+{n:'R2', unit:'coldwar', unitLabel:'Research Project — Semester 2', label:'Tell Your Artifact\'s Story', meta:'In-class research project — gather, evaluate, wipe, present in a format you choose', quiz:false, test:false,
+  terms:[
+    ['Provenance','The documented history of an object\'s ownership and origin.'],
+    ['Material Culture','Physical objects studied as evidence of a culture\'s beliefs and practices.'],
+    ['Curation','The process of selecting, organizing, and presenting items for study or display.'],
+    ['Annotation','A note added to a source explaining its relevance or content.'],
+    ['Bibliography','A list of sources used in researching a topic.'],
+    ['Fair Use','Limited legal use of copyrighted material without permission, for purposes like education.'],
+    ['Visual Evidence','Photographs, artwork, or objects used as evidence in historical argument.'],
+    ['Historical Significance','The reasons an event, object, or person matters within a larger historical narrative.'],
+    ['CRAAP Test','A source-evaluation method checking Currency, Relevance, Authority, Accuracy, and Purpose.'],
+    ['Citation','A formal reference identifying where a piece of information came from.']
+  ],
+  script:[
+    ['Mon','Research Skills Refresher','Quick CRAAP review, then introduce this week\'s material-culture vocabulary. Students choose their artifact — it must come from a period the class has actually covered so far this year, not a free pick from anywhere in history.'],
+    ['Tue','Gather','Entirely in class: students use AI tools to gather roughly 35 facts about their chosen artifact\'s origin and significance.'],
+    ['Wed','Evaluate & Cite','Students run each source through the CRAAP test, build a citation list, and choose how they\'ll present the story — poster, slides, a short in-character monologue, a mini-museum display card, whatever fits the artifact best.'],
+    ['Thu','Wipe & Build','Devices and notes are set aside. Students write their presentation content pen-and-paper from what they\'ve internalized, then build their chosen format from those notes afterward.'],
+    ['Fri','Tell the Story','Students present their artifact and its significance in the format they chose — the point is that the story is theirs, not that every group looks the same.']
+  ],
+  primarySource:{tag:'suggested', title:'Provenance Case Study', source:'A well-documented museum object with a clear ownership/origin history', task:'Students see what a strong provenance record looks like before researching their own artifact.'},
+  project:{title:'Tell Your Artifact\'s Story', task:'A student-chosen presentation format (poster, slides, monologue, display card, or similar) telling the origin and significance of one artifact from a period already covered in class — built from pen-and-paper notes written from internalized research, not copied material. See the syllabus for the full process.'}
+},
+
+{n:26, unit:'contemporary', unitLabel:'Unit 7 — The Contemporary World', label:'Movements Toward Independence and Democracy', meta:'Ch. 32, pp. 510–531 — Compelling Question: \"How have emerging nations fared in their quest for political stability, economic growth, and democracy?\"', quiz:true, test:false,
+  terms:[
+    ['Decolonization','The process by which colonies gained independence from imperial powers.'],
+    ['Self-Determination','The right of a people to choose their own political status.'],
+    ['Artificial Border','A political boundary drawn without regard to existing ethnic, cultural, or linguistic lines.'],
+    ['Ethnic Conflict','Violent conflict rooted in tension between distinct ethnic or cultural groups.'],
+    ['Apartheid','A legal system of racial segregation enforced in South Africa until the early 1990s.'],
+    ['Satyagraha','Gandhi\'s philosophy of nonviolent civil disobedience, central to India\'s independence movement.'],
+    ['Coup','The sudden, illegal seizure of power from a government.'],
+    ['Nation-Building','The process of constructing a shared national identity and functioning state institutions.'],
+    ['Economic Dependency','A condition where a country relies heavily on foreign markets, aid, or investment.'],
+    ['Pan-Africanism \u0026 Pan-Arabism','Movements promoting unity and solidarity among African nations and Arab nations respectively, tied to leaders like Kenyatta and Nasser.']
+  ],
+  script:[
+    ['Mon','Independence, Then What?','Bridge directly from Week 7\'s colonial border overlay exercise into the consequences of those borders after independence. Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Discussion','Core reading on post-independence political stability challenges.'],
+    ['Wed','Primary Source Day','Use your existing "The impact of Africa\'s artificial border designs" document — colonial border-drawing, divide-and-rule, post-independence ethnic conflict.'],
+    ['Thu','Revisit the Overlay Map','Bring back the Week 7 ethnic/colonial border overlay map — students now add a third layer: where conflict emerged after independence.'],
+    ['Fri','Quiz Day','10-term quiz.']
+  ],
+  primarySource:{tag:'your-doc', title:'The Impact of Africa\'s Artificial Border Designs', source:'Your uploaded document', task:'Students connect colonial-era border decisions (from Week 7\'s map work) directly to post-independence conflict.'},
+  project:{title:'Border Overlay, Revisited', task:'Students add a third layer to their Week 7 map — where ethnic conflict emerged after independence — making the throughline from colonization to consequence visible on one map.'}
+},
+
+{n:27, unit:'contemporary', unitLabel:'Unit 7', label:'The New Geopolitics', meta:'Ch. 33, pp. 532–541 — Compelling Question: \"How did the terrorist attacks on September 11, 2001 affect global politics?\"', quiz:true, test:false,
+  terms:[
+    ['Geopolitics','The study of how geography influences politics and international relations.'],
+    ['Terrorism','The use of violence against civilians to achieve political or ideological goals.'],
+    ['Non-State Actor','A politically significant organization that is not a sovereign government.'],
+    ['Unilateralism','A nation acting independently in foreign policy without coordinating with others.'],
+    ['Multilateralism','Cooperative action among multiple nations toward a shared goal.'],
+    ['Failed State','A state that has lost the capacity to perform basic governing functions.'],
+    ['Sovereignty','The authority of a state to govern itself.'],
+    ['Asymmetric Warfare','Conflict between opposing forces of significantly unequal military strength.'],
+    ['Regime Change','The forcible or externally driven replacement of a country\'s government.'],
+    ['September 11, 2001','The al-Qaeda terrorist attacks that reshaped U.S. foreign policy and global security priorities.']
+  ],
+  script:[
+    ['Mon','A New Kind of Threat','Frame how 9/11 shifted geopolitics away from state-vs-state conflict. Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Discussion','Core reading on the chapter\'s compelling question: how did 9/11 affect global politics?'],
+    ['Wed','Primary Source Day','A post-9/11 policy speech excerpt — students identify the doctrine it establishes.'],
+    ['Thu','Non-State Actor Case Study','Students research one non-state actor\'s role in a specific modern conflict.'],
+    ['Fri','Quiz Day','10-term quiz.']
+  ],
+  primarySource:{tag:'suggested', title:'Post-9/11 policy speech excerpt', source:'A U.S. or allied government address on the War on Terror', task:'Students identify the doctrine or policy shift the speech establishes.'},
+  project:{title:'Sovereignty Under Pressure', task:'Students present a short case where a state\'s sovereignty was challenged by a non-state actor.'}
+},
+
+{n:28, unit:'contemporary', unitLabel:'Unit 7', label:'The Impact of Globalization', meta:'Ch. 34, pp. 542–559 — Compelling Question: \"What have been the costs and benefits of globalization?\"', quiz:true, test:true,
+  terms:[
+    ['Globalization','The increasing interconnection of the world\'s economies, cultures, and populations.'],
+    ['Outsourcing','Contracting work to an external, often foreign, provider to reduce costs.'],
+    ['Multinational Corporation','A company operating in multiple countries.'],
+    ['Free Trade','Trade between nations without significant tariffs or restrictions.'],
+    ['Tariff','A tax imposed on imported or exported goods.'],
+    ['Interdependence','Mutual reliance between nations or economies.'],
+    ['Cultural Globalization','The spread of cultural products and practices across national boundaries.'],
+    ['Digital Divide','The gap in access to modern information technology between groups or regions.'],
+    ['Supply Chain','The network of production and logistics required to bring a product to market.'],
+    ['Special Economic Zone','A designated area with distinct economic regulations to attract investment/trade.']
+  ],
+  script:[
+    ['Mon','A Connected World','Use the book\'s "Locations of a Multinational Corporation" and "Special Economic Zones" maps (pp. 549, 588). Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Discussion','Core reading on the costs and benefits of globalization.'],
+    ['Wed','Primary Source Day','A supply-chain case study (e.g., where a common product\'s components are made) — students trace it across borders.'],
+    ['Thu','Costs & Benefits Debate','Structured debate on whether globalization\'s benefits outweigh its costs.'],
+    ['Fri','Test Day','Unit 7 Test, Part I — covers Weeks 26–28 (Independence Movements through Globalization).']
+  ],
+  primarySource:{tag:'suggested', title:'Product supply-chain case study', source:'A traceable everyday product\'s manufacturing origins', task:'Students map where a single product\'s components are sourced and assembled, then evaluate the benefits/costs to each country involved.'},
+  project:{title:'Trace the Product', task:'Students pick one everyday object and trace its supply chain across as many countries as they can document.'}
+},
+
+{n:29, unit:'contemporary', unitLabel:'Unit 7', label:'Rights, Religion, and Identity', meta:'Ch. 35, pp. 560–577 — Compelling Question: \"How have views about human rights, religion, and identity changed in the modern world?\"', quiz:true, test:false,
+  terms:[
+    ['Human Rights','Rights believed to belong to all people simply by being human.'],
+    ['Genocide','The deliberate, systematic destruction of a national, ethnic, racial, or religious group.'],
+    ['National Sovereignty Paradox','The tension between a state\'s right to self-govern and the international community\'s duty to prevent human rights abuses.'],
+    ['Nuremberg Trials','The post-WWII tribunals that prosecuted Nazi leadership and established individual accountability under international law.'],
+    ['Universal Declaration of Human Rights','A 1948 UN document outlining fundamental rights owed to all people.'],
+    ['Religious Fundamentalism','A strict, literal adherence to religious doctrine, often opposing secular or modernist change.'],
+    ['Secularism','The principle of separating government from religious institutions.'],
+    ['Identity Politics','Political positions based on the interests of a particular social identity group.'],
+    ['Humanitarian Intervention','Foreign action taken to prevent or stop human rights abuses in another state.'],
+    ['Genocide Convention','The 1948 UN treaty defining genocide as an international crime.']
+  ],
+  script:[
+    ['Mon','A Paradox at the Center','Introduce the core tension: national sovereignty vs. international human rights enforcement. Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Discussion','Use your existing "The United Nations and the paradox of human rights" document directly — it maps closely onto this chapter\'s content.'],
+    ['Wed','Investigating Primary Sources: Genocide Response','Use the book\'s own feature — "How Has the International Community Responded to Genocides?" (p. 574) — Genocide Convention, Ford\'s address, the Rwanda letter, and Colin Powell on Darfur.'],
+    ['Thu','Case Comparison','Students compare the international response to two of the genocides featured (e.g., the Holocaust from Week 14 vs. Rwanda or Darfur).'],
+    ['Fri','Quiz Day','10-term quiz.']
+  ],
+  primarySource:{tag:'your-doc', title:'The United Nations and the Paradox of Human Rights', source:'Your uploaded document, paired with History Alive! Investigating Primary Sources, p. 574', task:'Students use both sources together to argue how the UN Charter\'s sovereignty paradox has played out across specific 20th/21st-century genocides.'},
+  project:{title:'Response Timeline', task:'Students build a comparative timeline of international response speed/strength across the Holocaust, Rwanda, and Darfur, using the featured primary sources.'}
+},
+
+{n:30, unit:'contemporary', unitLabel:'Unit 7', label:'A New Role for the West', meta:'Ch. 36, pp. 578–591 — Compelling Question: \"Has the West entered a phase of historical decline?\"', quiz:true, test:false,
+  terms:[
+    ['Soft Power','The ability to influence others through attraction and persuasion rather than force.'],
+    ['Hard Power','The ability to influence others through military or economic coercion.'],
+    ['Hegemony','Dominant influence or control exercised by one state over others.'],
+    ['Multipolar World','A global order with several centers of comparable power, rather than one or two dominant states.'],
+    ['Emerging Power','A state gaining significant international influence, often rapidly.'],
+    ['Relative Decline','A loss of comparative influence even without an absolute loss of capability.'],
+    ['European Union','A political and economic union of European member states.'],
+    ['Geopolitical Shift','A significant change in the global balance of power or influence.'],
+    ['Global Leadership','The capacity and willingness of a state to shape international norms and outcomes.'],
+    ['Historical Decline','The theory that a civilization or power center inevitably weakens over time.']
+  ],
+  script:[
+    ['Mon','Has the West Declined?','Frame the chapter\'s compelling question directly as a debate prompt. Introduce this week\'s 10 terms.'],
+    ['Tue','Reading + Discussion','Core reading using the European Union map (p. 582).'],
+    ['Wed','Primary Source Day','Excerpt from John Lewis Gaddis\'s "The Cold War," 2007 (p. 522) — students evaluate a historian\'s retrospective claim against what the class has studied all year.'],
+    ['Thu','Year-in-Review Synthesis','Students build a single-page "argument map" answering the chapter\'s compelling question using evidence from at least three units studied this year.'],
+    ['Fri','Quiz Day','10-term quiz. This closes the textbook — everything from here is review, extension, and capstone work.']
+  ],
+  primarySource:{tag:'textbook', title:'John Lewis Gaddis, The Cold War, 2007', source:'History Alive! Primary Source Quotations, p. 522', task:'Students evaluate Gaddis\'s retrospective historical claim against the specific events studied across the year.'},
+  project:{title:'Year-in-Review Argument Map', task:'Students synthesize the full year into a one-page argument answering "has the West entered a phase of historical decline?" using evidence from at least three different units.'}
+},
+
+{n:31, unit:'contemporary', unitLabel:'Extension — Quarter Review', label:'Quarter Review & Synthesis I', meta:'Cumulative review — Units 4–6 — plus a scaffolded synthesis essay (one of your quarterly writing pieces)', quiz:true, test:false,
+  terms:[
+    ['Synthesis','Combining separate pieces of evidence into one coherent argument.'],
+    ['Thesis Statement','A clear, arguable claim that a piece of writing sets out to prove.'],
+    ['Historical Argument','A claim about the past supported by evidence and reasoning.'],
+    ['Contextualization','Situating an event within the broader circumstances surrounding it.'],
+    ['Periodization','Dividing history into named eras to make patterns easier to see.'],
+    ['Historical Empathy','Understanding a past perspective on its own terms, without imposing modern judgment.'],
+    ['Turning Point','A moment after which the course of events changed direction.'],
+    ['Continuity','An element that stays the same across a period of change.'],
+    ['Change Over Time','How a place, institution, or idea shifted across a span of history.'],
+    ['Corroboration','Confirming a claim by checking it against another independent source.']
+  ],
+  script:[
+    ['Mon','Review Stations','Rotate through quick-recall stations covering the major turning points of Units 4–6. Introduce this week\'s 10 terms.'],
+    ['Tue','Building a Thesis','Teach how to construct a historical argument: a claim, then evidence from at least two different units that supports it.'],
+    ['Wed','Synthesis Writing Workshop','Scaffolded in-class writing — a short synthesis essay connecting a turning point from one unit to a turning point in another. This satisfies one of your quarterly scaffolded-writing requirements.'],
+    ['Thu','Peer Review','Students exchange essays and give feedback using a simple two-question rubric: is the claim clear, and is it actually supported by evidence?'],
+    ['Fri','Quiz Day','Cumulative review quiz on this week\'s synthesis vocabulary and the units reviewed.']
+  ],
+  primarySource:{tag:'suggested', title:'Cumulative Class Timeline', source:'The running timeline your class has been building all year', task:'Students add turning points from Units 4–6 to the timeline, marking the causal links between them.'},
+  project:{title:'Two-Unit Synthesis Essay', task:'A short in-class essay connecting a turning point from one unit to a turning point in another, using the same evidence-based writing practiced in the research projects.'}
+},
+
+{n:32, unit:'contemporary', unitLabel:'Extension — Deepening Unit 7', label:'Climate, Sustainability & the Global Economy', meta:'Extension of Ch. 34 — Hawaii standard SS.WH.8.12.1: climate change and global sustainability', quiz:true, test:false,
+  terms:[
+    ['Greenhouse Effect','The trapping of heat in Earth\'s atmosphere by certain gases.'],
+    ['Deforestation','The large-scale clearing of forests, often for agriculture or development.'],
+    ['Fossil Fuel','A carbon-based energy source formed from ancient organic matter, such as coal, oil, or gas.'],
+    ['Renewable Energy','Energy from sources that naturally replenish, such as solar or wind.'],
+    ['Carbon Footprint','The total greenhouse gas emissions caused by a person, group, or activity.'],
+    ['Sustainable Development','Development that meets present needs without compromising future generations\' ability to meet theirs.'],
+    ['Food Security','Reliable access to sufficient, safe, and nutritious food.'],
+    ['Water Scarcity','A shortage of sufficient available water to meet demand.'],
+    ['Climate Refugee','A person displaced by climate-related environmental change.'],
+    ['Global Commons','Resources shared by all of humanity, such as the atmosphere or oceans.']
+  ],
+  script:[
+    ['Mon','Why This Belongs Here','Connect back to Ch. 34\'s globalization content — global supply chains and global environmental impact are two sides of the same interdependence. Introduce this week\'s 10 terms.'],
+    ['Tue','Case Study','Students examine one climate or sustainability issue tied to a region already studied this year.'],
+    ['Wed','Primary Source Day','The UN Sustainable Development Goals — students identify which goals connect most directly to issues raised earlier in the year.'],
+    ['Thu','Project Work Day','Students build their sustainability case study poster.'],
+    ['Fri','Quiz Day','10-term quiz.']
+  ],
+  primarySource:{tag:'suggested', title:'UN Sustainable Development Goals', source:'https://sdgs.un.org/goals', task:'Students identify which of the 17 goals connects most directly to a region or issue studied earlier in the year, and why.'},
+  project:{title:'Sustainability Case Study Poster', task:'Students research one Sustainable Development Goal and present a poster covering cause, effect, and proposed solutions — directly practicing Hawaii\'s Anchor Standard 5, Taking Informed Action.'}
+},
+
+{n:33, unit:'contemporary', unitLabel:'Extension — Deepening Unit 7', label:'Global Human Rights Today', meta:'Extension of Ch. 35 — Hawaii standard SS.WH.8.7.2: human rights violations and proposed solutions', quiz:true, test:false,
+  terms:[
+    ['Child Soldier','A person under 18 recruited or used by an armed force or group.'],
+    ['Forced Migration','Displacement caused by conflict, persecution, or disaster rather than choice.'],
+    ['Gender Inequality','Unequal treatment or opportunity based on gender.'],
+    ['Human Trafficking','The illegal trade of people for forced labor or exploitation.'],
+    ['Political Refugee','A person who has fled their country due to persecution or fear of persecution.'],
+    ['Asylum','Protection granted by a state to someone fleeing persecution in their own country.'],
+    ['Statelessness','The condition of having no recognized citizenship in any country.'],
+    ['Advocacy','Public support for a particular cause or policy.'],
+    ['NGO','A non-governmental organization — a nonprofit operating independently of government.'],
+    ['Humanitarian Aid','Assistance provided to relieve human suffering, typically in crisis situations.']
+  ],
+  script:[
+    ['Mon','Where This Picks Up','Bridge back to Week 29\'s Rights, Religion, and Identity content — this week trades the historical genocides already studied for the human rights issues named in Hawaii\'s own standards. Introduce this week\'s 10 terms.'],
+    ['Tue','Case Selection','Students choose one human rights issue (child soldiers, trafficking, statelessness, or another) to research.'],
+    ['Wed','Primary Source Day','Current refugee and displacement data from UNHCR — students ground their case in real current numbers, not just description.'],
+    ['Thu','Project Work Day','Students build their case-and-proposal write-up.'],
+    ['Fri','Quiz Day','10-term quiz.']
+  ],
+  primarySource:{tag:'suggested', title:'UNHCR Refugee Statistics', source:'https://www.unhcr.org/refugee-statistics/', task:'Students pull current data relevant to their chosen human rights issue and cite it in their proposal.'},
+  project:{title:'Human Rights Case & Proposal', task:'Students research one human rights issue and propose a realistic solution or intervention — practicing Hawaii\'s Anchor Standard 5 a second time, on a different issue than Week 32.'}
+},
+
+{n:34, unit:'contemporary', unitLabel:'Capstone', label:'Model World Summit', meta:'Capstone simulation — apply a year of causal-chain thinking to a live global issue', quiz:true, test:false,
+  terms:[
+    ['Diplomacy','The practice of managing relations and negotiations between states.'],
+    ['Negotiation','A structured discussion aimed at reaching an agreement.'],
+    ['Resolution','A formal expression of a group\'s decision or opinion, often voted on.'],
+    ['Bloc','A group of states acting together for a common purpose.'],
+    ['Consensus','General agreement reached without a formal vote.'],
+    ['Sanction','A penalty imposed by one or more states to influence another\'s behavior.'],
+    ['Treaty','A formal, binding agreement between states.'],
+    ['Multilateralism','Cooperative action among multiple nations toward a shared goal.'],
+    ['Stakeholder','A party with an interest in or affected by a decision.'],
+    ['Sovereignty','The authority of a state to govern itself.']
+  ],
+  script:[
+    ['Mon','Assign Roles','Students are assigned a nation or bloc and a real current global issue (drawn from Weeks 32–33\'s case studies) to represent. Introduce this week\'s 10 terms.'],
+    ['Tue','Research Your Position','Students research their assigned nation\'s real stance and interests on the issue.'],
+    ['Wed','Negotiation Session I','Opening statements and initial coalition-building, in the format of a Model UN committee session.'],
+    ['Thu','Negotiation Session II + Vote','Final negotiation and a vote on a class resolution.'],
+    ['Fri','Debrief + Quiz','Debrief on what made real-world negotiation hard, then the 10-term quiz.']
+  ],
+  primarySource:{tag:'suggested', title:'A Real UN Resolution', source:'Any adopted UN General Assembly or Security Council resolution on a current issue', task:'Students use the resolution\'s structure and language as a model before drafting their own.'},
+  project:{title:'Model World Summit', task:'A full-class simulation applying a year\'s worth of causal-chain thinking — geography, economy, ideology — to a live global issue, ending in a negotiated class resolution.'}
+},
+
+{n:35, unit:'contemporary', unitLabel:'Extension — Quarter Review', label:'Quarter Review & Synthesis II', meta:'Cumulative review — Units 6–7 — plus a second scaffolded synthesis essay', quiz:true, test:false,
+  terms:[
+    ['Synthesis','Combining separate pieces of evidence into one coherent argument.'],
+    ['Causation','The relationship between an event and the reason it happened.'],
+    ['Correlation vs. Causation','The distinction between two things occurring together and one actually causing the other.'],
+    ['Long-Term Cause','An underlying condition that made an event possible well before it happened.'],
+    ['Immediate Cause','The direct trigger that set an event into motion.'],
+    ['Legacy','The lasting effect of a person, event, or decision on what followed.'],
+    ['Precedent','An earlier event or decision that influences how later ones are handled.'],
+    ['Historical Pattern','A recurring relationship between causes and effects across different times or places.'],
+    ['Root Cause','The original, underlying reason an event or issue exists, as opposed to its symptoms.'],
+    ['Contextualization','Situating an event within the broader circumstances surrounding it.']
+  ],
+  script:[
+    ['Mon','Review Stations','Rotate through quick-recall stations covering the major turning points of Units 6–7. Introduce this week\'s 10 terms.'],
+    ['Tue','Finding the Pattern','Students identify one historical pattern that has now shown up more than once across the year\'s units.'],
+    ['Wed','Synthesis Writing Workshop','A second scaffolded in-class essay — this time arguing for a historical pattern using evidence from at least two units, including one from this quarter.'],
+    ['Thu','Peer Review','Students exchange essays and give feedback using the same simple rubric as Week 31.'],
+    ['Fri','Quiz Day','Cumulative review quiz on this week\'s vocabulary and the units reviewed.']
+  ],
+  primarySource:{tag:'suggested', title:'Cumulative Class Timeline', source:'The running timeline your class has been building all year', task:'Students add the year\'s remaining turning points to the timeline and circle any repeating patterns.'},
+  project:{title:'Historical Pattern Essay', task:'A short in-class essay arguing that a specific historical pattern (e.g., how empires overextend, how propaganda enables control) has repeated across at least two units studied this year.'}
+},
+
+{n:36, unit:'contemporary', unitLabel:'Final Review', label:'Final Exam Review', meta:'Last week of the year — cumulative review and exam prep', quiz:false, test:true,
+  terms:[
+    ['Chronology','The arrangement of events in the order they occurred.'],
+    ['Causation','The relationship between an event and the reason it happened.'],
+    ['Nationalism','Pride in one\'s nation; patriotic feelings, ideas, and actions.'],
+    ['Totalitarianism','A system of government where the state seeks total control over public and private life.'],
+    ['Containment','The U.S. Cold War strategy of preventing the spread of communism.'],
+    ['Decolonization','The process by which colonies gained independence from imperial powers.'],
+    ['Globalization','The increasing interconnection of the world\'s economies, cultures, and populations.'],
+    ['Human Rights','Rights believed to belong to all people simply by being human.'],
+    ['Sovereignty','The authority of a state to govern itself.'],
+    ['Historical Pattern','A recurring relationship between causes and effects across different times or places.']
+  ],
+  script:[
+    ['Mon','Review Stations','Rotate through review stations covering the full year, Historiography through the Model World Summit.'],
+    ['Tue','Practice Test','A low-stakes practice test in the same format as the final exam.'],
+    ['Wed','Targeted Review','Reteach whatever the practice test showed was weakest, class by class.'],
+    ['Thu','Q&A + Study Guides Due','Open Q&A; students turn in their self-built study guides.'],
+    ['Fri','Final Exam','Cumulative final exam covering the full year.']
+  ],
+  primarySource:{tag:'suggested', title:'Student-Built Study Guides', source:'Compiled from the year\'s terms, primary sources, and projects', task:'No new source this week — students draw on everything gathered across the year.'},
+  project:{title:'Study Guide Build', task:'Students build their own one-page study guide synthesizing the full year, due the day before the final exam.'}
+}
+];
+
+const trailEl = document.getElementById('trail');
+WEEKS.forEach(w=>{
+  const btn = document.createElement('button');
+  btn.className = 'waypoint';
+  btn.dataset.n = w.n;
+  const color = UNIT_COLORS[w.unit];
+  btn.innerHTML = `
+    <span class="pin" style="background:${color}"></span>
+    <span class="wp-num">WK ${w.n}</span>
+    <span class="wp-label">${w.label}</span>
+    <span class="wp-flags">
+      ${w.quiz ? '<span class="flag-quiz" title="Friday quiz"></span>' : ''}
+      ${w.test ? '<span class="flag-test" title="Test this week"></span>' : ''}
+    </span>
+  `;
+  btn.addEventListener('click', ()=>render(w.n));
+  trailEl.appendChild(btn);
+});
+
+function renderDayDetail(d){
+  return `
+    <div class="day-detail">
+      <div class="dd-head">
+        <div class="dd-date">${d.dateLabel}</div>
+        <div class="dd-period">${d.periodNote}</div>
+      </div>
+      <div class="dd-title">${d.title} <span class="dd-type">${d.type}</span></div>
+
+      <div class="dd-section dd-open">
+        <div class="dd-label">▸ Open <span class="dd-time">${d.open.time}</span></div>
+        <div class="dd-sec-title">${d.open.title}</div>
+        <p>${d.open.text}</p>
+      </div>
+
+      <div class="dd-section dd-agenda">
+        <div class="dd-label">▸ Agenda</div>
+        ${d.agenda.map(a=>`
+          <div class="dd-agenda-item">
+            <div class="dd-sec-title">${a.title} <span class="dd-time">${a.time}</span></div>
+            <p>${a.text}</p>
+          </div>
+        `).join('')}
+      </div>
+
+      ${d.activity.text ? `
+      <div class="dd-section dd-activity">
+        <div class="dd-label">▸ Activity <span class="dd-time">${d.activity.time}</span></div>
+        <div class="dd-sec-title">${d.activity.title}</div>
+        <p>${d.activity.text}</p>
+      </div>` : ''}
+
+      <div class="dd-section dd-close">
+        <div class="dd-label">▸ Close <span class="dd-time">${d.close.time}</span></div>
+        <p>${d.close.text}</p>
+      </div>
+    </div>
+  `;
+}
+
+function selectDay(i){
+  const w = WEEKS.find(x=>x.n===currentWeek);
+  document.querySelectorAll('.day-tab-btn').forEach((btn,idx)=>btn.classList.toggle('active', idx===i));
+  document.getElementById('dayDetailBox').innerHTML = renderDayDetail(w.detailedDays[i]);
+}
+
+let currentWeek = 1;
+const LINKS = {
+  1: [{url:'./Historians-Toolkit-Reader-Printable.html', label:"The Historian's Toolkit: A Reader (printable)"}],
+  2: [{url:'./Historians-Toolkit-Reader-Printable.html', label:"The Historian's Toolkit: A Reader (printable)"}, {url:'./Week-Final-Full-Articles.html', label:'Week 2 Full Articles'}]
+};
+
+function render(n){
+  currentWeek = n;
+  const w = WEEKS.find(x=>x.n===n);
+  const links = LINKS[w.n] || [];
+  document.querySelectorAll('.waypoint').forEach(el=>{
+    el.classList.toggle('active', Number(el.dataset.n)===n);
+  });
+  document.querySelector(`.waypoint[data-n="${n}"]`)?.scrollIntoView({inline:'center',behavior:'smooth',block:'nearest'});
+
+  const main = document.getElementById('main');
+  main.innerHTML = `
+    <p class="unit-banner">${w.unitLabel}</p>
+    <h1 class="week-title">Week ${w.n} — ${w.label}</h1>
+    <p class="week-meta">${w.meta}</p>
+
+    <div class="card">
+      <h2>This Week's 10 Terms</h2>
+      <div class="terms-grid">
+        ${w.terms.map((t,i)=>`
+          <div class="term-card" onclick="this.classList.toggle('open')">
+            <div class="t-num">${String(i+1).padStart(2,'0')}</div>
+            <div class="t-word">${t[0]}</div>
+            <div class="t-def">${t[1]}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+
+    ${w.detailedDays ? `
+    <div class="card">
+      <h2>Day-by-Day Script</h2>
+      <div class="day-tabs">
+        ${w.detailedDays.map((d,i)=>`<button class="day-tab-btn ${i===0?'active':''}" data-idx="${i}" onclick="selectDay(${i})">Day ${i+1}</button>`).join('')}
+      </div>
+      <div id="dayDetailBox">${renderDayDetail(w.detailedDays[0])}</div>
+    </div>
+    ` : `
+    <div class="card">
+      <h2>Day-by-Day Script</h2>
+      <div class="script-grid">
+        ${w.script.map(d=>`
+          <div class="day ${d[0]==='Fri' && w.test ? 'friday-test':''}">
+            <div class="d-name">${d[0]}</div>
+            <div class="d-title">${d[1]}</div>
+            <div class="d-body">${d[2]}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+    `}
+
+    <div class="two-col">
+      <div class="card">
+        <h2>Primary Source Exercise</h2>
+        <span class="tag ${w.primarySource.tag}">${w.primarySource.tag==='your-doc'?'Your Document':w.primarySource.tag==='textbook'?'Textbook Feature':'Suggested Source'}</span>
+        <p style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin:0 0 0.3rem;">${w.primarySource.title}</p>
+        <p class="ps-source">${w.primarySource.source}</p>
+        <p style="font-size:0.9rem;">${w.primarySource.task}</p>
+        ${links.length ? `<p class="note" style="border-top:none;margin-top:0.8rem;padding-top:0;">Read it yourself:</p>` + links.map(l=>`<p style="font-size:0.88rem;margin:0.2rem 0;"><a href="${l.url}" target="_blank" rel="noopener" style="color:var(--brass-deep);">${l.label} ↗</a></p>`).join('') : ''}
+      </div>
+
+      <div class="card">
+        <h2>Project</h2>
+        <p style="font-family:var(--font-display);font-weight:600;font-size:1.05rem;margin:0 0 0.5rem;">${w.project.title}</p>
+        <p style="font-size:0.9rem;">${w.project.task}</p>
+        <p class="note">Friday ${w.test ? 'is a Test day this week (covers multiple weeks — see script).' : 'is the regular 10-term quiz.'}</p>
+      </div>
+    </div>
+  `;
+}
+
+const CALENDAR = [
+  {range:'Aug 3–7'}, {range:'Aug 10–14'}, {range:'Aug 17–21'}, {range:'Aug 24–28'}, {range:'Aug 31–Sep 4'},
+  {range:'Sep 7–11'}, {range:'Sep 14–18'}, {range:'Sep 21–25'}, {range:'Sep 28–Oct 1'},
+  {range:'Oct 12–16', beforeBreak:'Fall Break — Oct 2–9'},
+  {range:'Oct 19–23'}, {range:'Oct 26–30'}, {range:'Nov 2–6'}, {range:'Nov 9–13'}, {range:'Nov 16–20'},
+  {range:'Nov 30–Dec 4', beforeBreak:'Thanksgiving Break — Nov 23–27'},
+  {range:'Dec 7–11'}, {range:'Dec 14–17', flag:'Short week — Q2 ends Dec 17'},
+  {range:'Jan 4–8', beforeBreak:'Winter Break — Dec 18–31'},
+  {range:'Jan 11–15'}, {range:'Jan 18–22', flag:'MLK Day Jan 18 — light week'},
+  {range:'Jan 25–29'}, {range:'Feb 1–5'}, {range:'Feb 8–12'},
+  {range:'Feb 15–19', flag:'Presidents Day + Learning Voyage Week — very light'},
+  {range:'Feb 22–26', flag:'Interim Break Feb 22 — light'},
+  {range:'Mar 1–5'}, {range:'Mar 8–12'},
+  {range:'Mar 15–18', flag:'Buffer — Q3 ends Mar 18', buffer:true},
+  {range:'Mar 30–Apr 2', beforeBreak:'Spring Break — Mar 19–29', buffer:true},
+  {range:'Apr 5–9', buffer:true}, {range:'Apr 12–16', buffer:true},
+  {range:'Apr 19–23', flag:'Interim Break Apr 19 — light', buffer:true},
+  {range:'Apr 26–30', buffer:true}, {range:'May 3–7', buffer:true},
+  {range:'May 10–14', buffer:true}, {range:'May 17–21', buffer:true},
+  {range:'May 24–28', flag:'Last Day for Students May 28', buffer:true}
+];
+
+let MODE = 'weekly';
+function setMode(m){
+  MODE = m;
+  document.getElementById('modeWeekly').classList.toggle('active', m==='weekly');
+  document.getElementById('modeCal').classList.toggle('active', m==='calendar');
+  document.getElementById('modeQuiz').classList.toggle('active', m==='quiz');
+  document.querySelector('.trail-wrap').style.display = m==='weekly' ? '' : 'none';
+  if(m==='weekly'){ render(currentWeek); }
+  else if(m==='calendar'){ renderCalendar(); }
+  else { renderQuiz(); }
+}
+
+// ---------- QUESTION SIMULATOR ----------
+const QUIZ_SEED = {
+  'week1': { name: 'Week 1: Historiography & the Timeline', questions: [
+    { question: "What is an artifact?", choices: ["An object made or used by people in the past, studied for what it reveals about them", "A written eyewitness account of an event", "A modern museum replica of a historical object", "Any document older than 100 years"], correctIndex: 0, grounding: "Artifact: An object made or used by people in the past, studied for what it reveals about them." },
+    { question: "A soldier's diary written in the trenches during WWI is an example of a...", choices: ["Secondary source", "Primary source", "Historiography", "Corroboration"], correctIndex: 1, grounding: "Primary Source: Evidence created at the time by someone who witnessed or took part in the event." },
+    { question: "A 2020 textbook chapter analyzing the causes of WWI, written by a historian who wasn't alive during the war, is best described as a...", choices: ["Primary source", "Secondary source", "Artifact", "Chronology"], correctIndex: 1, grounding: "Secondary Source: A later account that analyzes or reports on evidence, rather than being the evidence itself." },
+    { question: "Putting the sealing of Tutankhamun's tomb, its 1922 discovery, and its cataloguing in the correct time order is an exercise in...", choices: ["Bias", "Corroboration", "Chronology", "Causation"], correctIndex: 2, grounding: "Chronology: The arrangement of events in the order they occurred." },
+    { question: "Studying King Tut's tomb using only the physical objects left behind, with no written record from Tutankhamun himself, is an example of...", choices: ["Historiography", "Archaeology", "Bias", "Corroboration"], correctIndex: 1, grounding: "Archaeology: The study of the past through physical remains — artifacts, structures, and sites." },
+    { question: "Willard Libby's 1949 discovery let scientists estimate the age of organic material by measuring...", choices: ["Tree ring width", "The decay of carbon-14", "Layers of sediment", "Ancient handwriting style"], correctIndex: 1, grounding: "Radiocarbon Dating: A scientific method for estimating the age of organic material using its rate of decay." },
+    { question: "Comparing how accounts of Howard Carter's 1922 discovery were written in 1923 versus how they're written today is a study of...", choices: ["Historiography", "Chronology", "Archaeology", "Causation"], correctIndex: 0, grounding: "Historiography: The study of how history itself has been written and interpreted over time." },
+    { question: "A British excavation diary from 1922 might downplay Egypt's own role in the discovery of the tomb. This is an example of...", choices: ["Corroboration", "Chronology", "Bias", "Archaeology"], correctIndex: 2, grounding: "Bias: A slant or leaning in a source, shaped by the perspective or purpose of its creator." },
+    { question: "Before trusting Howard Carter's diary claim that the tomb was untouched for 3,000 years, a historian looks for a second, independent piece of evidence. This process is called...", choices: ["Corroboration", "Causation", "Bias", "Historiography"], correctIndex: 0, grounding: "Corroboration: Confirming a claim by checking it against other independent sources." },
+    { question: "Explaining what specific factors led Carter to keep searching the Valley of the Kings for years is an exercise in...", choices: ["Chronology", "Causation", "Archaeology", "Bias"], correctIndex: 1, grounding: "Causation: The relationship between an event and the event(s) that caused it." },
+    { question: "Howard Carter's diary entry, written the day he opened the tomb, is best classified as:", choices: ["Secondary, because it's a personal reflection", "Primary, because it was written by someone who witnessed the event as it happened", "Secondary, because diaries are always written afterward", "Neither — diaries aren't historical sources"], correctIndex: 1, grounding: "\u201cNovember 26th. Today, at last, the moment I had dreamed of for years...\u201d" },
+    { question: "A textbook passage summarizing Howard Carter's 1922 discovery, written decades later by someone who wasn't there, is:", choices: ["Primary", "Secondary", "An artifact", "A form of bias"], correctIndex: 1, grounding: "In November 1922, British archaeologist Howard Carter and his team discovered the tomb..." },
+    { question: "A 1943 wartime photograph with a caption printed on the back by the government office that distributed it is:", choices: ["Primary, because both the photo and the caption were created at the time by people involved", "Secondary, because captions are always added later", "Neither, because it's an image, not text", "Secondary, because it was distributed by an office rather than an individual"], correctIndex: 0, grounding: "The original caption, printed on the back of the photograph by the wartime government office that distributed it..." },
+    { question: "A soldier's letter home from the WWI trenches is:", choices: ["Secondary, because it describes personal feelings", "Primary, because it was written firsthand during the event", "Secondary, because it wasn't published", "Neither — letters don't count as sources"], correctIndex: 1, grounding: "We have been in the trenches eleven days now without proper rest." },
+    { question: "An oral history interview recorded decades after the event, where the speaker describes what she personally witnessed as a child, is:", choices: ["Secondary, because too much time has passed", "Primary, because it's still a firsthand account regardless of when it was recorded", "Neither — spoken accounts aren't valid sources", "Secondary, because it was recorded by an interviewer"], correctIndex: 1, grounding: "I was nine years old. I remember my father came home early from the market..." },
+    { question: "An encyclopedia entry listing the causes of WWI, written by historians who never experienced the war, is:", choices: ["Primary", "Secondary", "An artifact", "A primary source once it's more than 50 years old"], correctIndex: 1, grounding: "World War I (1914\u20131918) was triggered by the assassination of Archduke Franz Ferdinand..." },
+    { question: "A government curfew notice issued and signed by an official the same day it took effect is:", choices: ["Secondary, because it's a legal document", "Primary, because it was created at the moment of the event by the authority itself", "Neither — official documents don't count as sources", "Secondary, because it's addressed to the public"], correctIndex: 1, grounding: "Issued this 14th day of March, by the Office of the City Magistrate." },
+    { question: "In what year was Ötzi's body discovered, and by whom?", choices: ["1922, by Howard Carter's team", "1991, by two German hikers", "1949, by Willard Libby", "2001, by CT scan technicians"], correctIndex: 1, grounding: "On September 19, 1991, two German hikers stumbled on a body..." },
+    { question: "Radiocarbon dating placed Ötzi's remains at approximately:", choices: ["1300 CE", "300 BCE", "3300 BCE", "30,000 BCE"], correctIndex: 2, grounding: "Lab testing on the body dated it to roughly 3300 BCE — about 5,300 years old." },
+    { question: "What object found with Ötzi suggested he likely held real status?", choices: ["A woven grass cape", "A flint knife", "A copper axe", "A fire-starting kit"], correctIndex: 2, grounding: "Copper was rare and valuable at the time — owning a copper axe likely meant real status." },
+    { question: "What did examining Ötzi's stomach contents and body reveal?", choices: ["His exact height and eye color", "His last two meals and the season he died", "His occupation as a soldier", "His cause of death immediately"], correctIndex: 1, grounding: "His stomach held the remains of his last two meals... Pollen in his gut even points to the season he died." },
+    { question: "For a full decade after his discovery, scientists believed Ötzi died of:", choices: ["A weapon wound", "Old age", "Exposure in a storm", "Disease"], correctIndex: 2, grounding: "For a full decade, scientists believed he'd simply died of exposure in a storm." },
+    { question: "What discovery in 2001 completely changed the theory of how Ötzi died?", choices: ["A second body was found nearby", "An arrowhead was found lodged in his shoulder", "His copper axe was proven to be a fake", "New radiocarbon tests changed his date by 1,000 years"], correctIndex: 1, grounding: "Someone took a second look at his CT scans and found... an arrowhead lodged deep in his left shoulder." },
+    { question: "What does the story of Ötzi's changing diagnosis — from exposure to murder — best illustrate?", choices: ["Scientists rarely make mistakes", "Once a theory is published it should not be questioned", "Gathering evidence isn't a one-time event; conclusions get revised as new evidence comes in", "Radiocarbon dating is unreliable"], correctIndex: 2, grounding: "Even trained scientists completely revise their conclusions as new evidence comes in — that's the process working." }
+  ]}
+};
+
+function quizStorageGet(){
+  try { const raw = localStorage.getItem('wh_quiz_pools'); return raw ? JSON.parse(raw) : {}; }
+  catch(e){ return {}; }
+}
+function quizStorageSet(pools){
+  try { localStorage.setItem('wh_quiz_pools', JSON.stringify(pools)); return true; }
+  catch(e){ return false; }
+}
+function quizEnsureSeed(){
+  const pools = quizStorageGet();
+  let changed = false;
+  Object.keys(QUIZ_SEED).forEach(k=>{ if(!pools[k]){ pools[k]=QUIZ_SEED[k]; changed=true; } });
+  if(changed) quizStorageSet(pools);
+  return pools;
+}
+
+let QUIZ_ACTIVE = null;
+let QUIZ_TEACHER_VIEW = true;
+let QUIZ_REVEALED = {};
+let QUIZ_PRINT_MODE = false;
+let QUIZ_SHOW_ADD = false;
+let QUIZ_ERROR = null;
+let QUIZ_GENERATING = false;
+
+function quizLetters(){ return ['A','B','C','D']; }
+
+function renderQuiz(){
+  const pools = quizEnsureSeed();
+  const keys = Object.keys(pools);
+  if(!QUIZ_ACTIVE || !pools[QUIZ_ACTIVE]) QUIZ_ACTIVE = keys[0] || null;
+  const main = document.getElementById('main');
+
+  if(QUIZ_PRINT_MODE && QUIZ_ACTIVE){
+    const pool = pools[QUIZ_ACTIVE];
+    let html = `<div class="quiz-print">
+      <div class="no-print" style="margin-bottom:20px;display:flex;gap:10px;">
+        <button class="mode-btn" onclick="QUIZ_PRINT_MODE=false;renderQuiz();">← Back to editor</button>
+        <button class="mode-btn active" onclick="window.print()">Print / Save as PDF</button>
+      </div>
+      <p style="font-size:12px;color:#666;">Modern World History · Mr. Hague</p>
+      <h1 style="font-size:26px;margin:0 0 4px;">${pool.name}</h1>
+      <p style="font-size:13px;color:#666;margin-bottom:28px;">Name: _______________________________&nbsp;&nbsp;&nbsp;&nbsp;Date: _______________</p>`;
+    pool.questions.forEach((q,i)=>{
+      html += `<div style="margin-bottom:22px;"><div style="font-weight:bold;margin-bottom:8px;">${i+1}. ${q.question}</div>`;
+      q.choices.forEach((c,ci)=>{ html += `<div style="margin-left:20px;margin-bottom:4px;">${quizLetters()[ci]}. ${c}</div>`; });
+      html += `</div>`;
+    });
+    html += `<div style="margin-top:40px;border-top:2px solid var(--brass);padding-top:16px;page-break-before:always;">
+      <div style="font-weight:bold;margin-bottom:10px;">Answer Key</div>`;
+    pool.questions.forEach((q,i)=>{ html += `<div style="margin-bottom:4px;font-size:14px;">${i+1}. ${quizLetters()[q.correctIndex]} — ${q.choices[q.correctIndex]}</div>`; });
+    html += `</div></div>`;
+    main.innerHTML = html;
+    return;
+  }
+
+  let html = `<p class="unit-banner">Island School — 2026–27</p><h1 class="week-title">Question Simulator</h1>
+  <p class="week-meta">One question pool per chapter. Paste lectures or readings anytime to add more — nothing here is invented from outside knowledge.</p>
+  <div class="quiz-layout">
+    <div class="quiz-sidebar">
+      <div class="quiz-sidebar-label">Chapters</div>`;
+  keys.forEach(k=>{
+    const p = pools[k];
+    html += `<button class="quiz-chapter-btn ${k===QUIZ_ACTIVE?'active':''}" onclick="QUIZ_ACTIVE='${k}';QUIZ_SHOW_ADD=false;QUIZ_REVEALED={};renderQuiz();">
+      ${p.name}<div class="quiz-chapter-count">${p.questions.length} questions</div>
+    </button>`;
+  });
+  html += `<button class="mode-btn" style="width:100%;margin-top:8px;" onclick="quizPromptNewChapter();">+ New Chapter</button>
+    </div>
+    <div class="quiz-main">`;
+
+  const pool = QUIZ_ACTIVE ? pools[QUIZ_ACTIVE] : null;
+  if(pool){
+    html += `<div class="quiz-toolbar">
+      <h2 style="font-family:var(--font-display);font-size:22px;color:var(--ink);margin:0;">${pool.name}</h2>
+      <div class="quiz-toolbar-actions">
+        <label style="font-size:12px;color:var(--ink-soft);"><input type="checkbox" ${QUIZ_TEACHER_VIEW?'checked':''} onchange="QUIZ_TEACHER_VIEW=this.checked;renderQuiz();"> Show answers</label>
+        <button class="mode-btn" onclick="QUIZ_SHOW_ADD=!QUIZ_SHOW_ADD;renderQuiz();">${QUIZ_SHOW_ADD?'Hide':'+ Add Material'}</button>
+        ${pool.questions.length>0 ? `<button class="mode-btn active" onclick="QUIZ_PRINT_MODE=true;renderQuiz();">Print</button>` : ''}
+      </div>
+    </div>`;
+
+    if(QUIZ_SHOW_ADD){
+      html += `<div class="quiz-add-box">
+        <div class="quiz-add-label">Add material to this pool</div>
+        <textarea id="quizMaterial" placeholder="Paste a lecture, reading, or notes here. New questions are generated only from what's pasted, then added to this chapter's pool."></textarea>
+        <div class="quiz-add-controls">
+          <label style="font-size:13px;color:var(--ink-soft);">Questions to add:
+            <select id="quizCount">
+              <option value="4">4</option><option value="6" selected>6</option><option value="8">8</option><option value="10">10</option>
+            </select>
+          </label>
+          <button class="mode-btn active" ${QUIZ_GENERATING?'disabled':''} onclick="quizGenerate();">${QUIZ_GENERATING?'Generating…':'Generate & Add to Pool'}</button>
+        </div>
+        ${QUIZ_ERROR ? `<div class="quiz-error">${QUIZ_ERROR}</div>` : ''}
+      </div>`;
+    }
+
+    if(pool.questions.length===0 && !QUIZ_SHOW_ADD){
+      html += `<p style="color:var(--ink-soft);padding:20px 0;">This pool is empty. Click "+ Add Material" to paste in a lecture or reading and generate the first questions.</p>`;
+    }
+
+    pool.questions.forEach((q,i)=>{
+      html += `<div class="quiz-card">
+        <div class="quiz-card-head">
+          <div class="quiz-card-q">${i+1}. ${q.question}</div>
+          <button class="quiz-remove-btn" onclick="quizDeleteQuestion(${i});">Remove</button>
+        </div>`;
+      q.choices.forEach((c,ci)=>{
+        const isCorrect = ci===q.correctIndex;
+        const showCorrect = QUIZ_TEACHER_VIEW && isCorrect;
+        html += `<div class="quiz-choice ${showCorrect?'correct':''}">${quizLetters()[ci]}. ${c}</div>`;
+      });
+      html += `<div class="quiz-source-row">
+        <button class="quiz-source-btn" onclick="QUIZ_REVEALED[${i}]=!QUIZ_REVEALED[${i}];renderQuiz();">${QUIZ_REVEALED[i]?'Hide source':'Show source'}</button>
+        ${QUIZ_REVEALED[i] ? `<div class="quiz-source-text">"${q.grounding}"</div>` : ''}
+      </div></div>`;
+    });
+  } else {
+    html += `<p style="color:var(--ink-soft);">Select or create a chapter to get started.</p>`;
+  }
+
+  html += `</div></div>`;
+  main.innerHTML = html;
+}
+
+function quizPromptNewChapter(){
+  const name = prompt('Name this chapter (e.g. Week 2: Geography)');
+  if(!name || !name.trim()) return;
+  const key = name.trim().toLowerCase().replace(/[^a-z0-9]+/g,'-') + '-' + Date.now();
+  const pools = quizStorageGet();
+  pools[key] = { name: name.trim(), questions: [] };
+  quizStorageSet(pools);
+  QUIZ_ACTIVE = key;
+  QUIZ_SHOW_ADD = true;
+  renderQuiz();
+}
+
+function quizDeleteQuestion(idx){
+  const pools = quizStorageGet();
+  const pool = pools[QUIZ_ACTIVE];
+  if(!pool) return;
+  pool.questions.splice(idx,1);
+  quizStorageSet(pools);
+  renderQuiz();
+}
+
+async function quizGenerate(){
+  const materialEl = document.getElementById('quizMaterial');
+  const countEl = document.getElementById('quizCount');
+  const material = materialEl ? materialEl.value.trim() : '';
+  const count = countEl ? Number(countEl.value) : 6;
+  if(!material){
+    QUIZ_ERROR = "Paste some material first — there's nothing to ground questions in yet.";
+    renderQuiz();
+    return;
+  }
+  QUIZ_GENERATING = true;
+  QUIZ_ERROR = null;
+  renderQuiz();
+
+  const system = `You write multiple-choice quiz questions for a 9th grade World History class. Follow these rules exactly:
+1. Every question must be answerable ONLY from the material the user provides. Never use outside knowledge.
+2. If the material can't support the requested number of good questions, write fewer rather than inventing content.
+3. Each question needs exactly 4 answer choices, only one correct.
+4. Wrong choices should be plausible, drawn from other real details in the material, misapplied.
+5. For every question, include a short verbatim snippet (under 20 words) copied directly from the material that proves the answer is grounded in it.
+6. Return ONLY a JSON array, no other text, in this exact shape:
+[{"question":"...","choices":["A","B","C","D"],"correctIndex":0,"grounding":"short exact snippet"}]`;
+  const userMsg = `Generate up to ${count} multiple-choice questions from this material:\n\n${material}`;
+
+  try{
+    const resp = await fetch('/.netlify/functions/generate-quiz', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ system, message: userMsg })
+    });
+    if(!resp.ok){
+      const errBody = await resp.text().catch(()=> '');
+      throw new Error('Server error (' + resp.status + '). ' + errBody.slice(0,200));
+    }
+    const data = await resp.json();
+    const textBlock = (data.content||[]).find(b=>b.type==='text');
+    if(!textBlock) throw new Error('No response text received.');
+    const start = textBlock.text.indexOf('[');
+    const end = textBlock.text.lastIndexOf(']');
+    if(start===-1||end===-1) throw new Error('No JSON array found in the response.');
+    const parsed = JSON.parse(textBlock.text.slice(start,end+1));
+    if(!Array.isArray(parsed)||parsed.length===0) throw new Error('No questions could be generated — try pasting more detail.');
+
+    const pools = quizStorageGet();
+    const pool = pools[QUIZ_ACTIVE] || { name:'New Chapter', questions:[] };
+    pool.questions = pool.questions.concat(parsed);
+    pools[QUIZ_ACTIVE] = pool;
+    quizStorageSet(pools);
+    QUIZ_SHOW_ADD = false;
+  } catch(e){
+    QUIZ_ERROR = (e && e.message) ? e.message : 'Something went wrong generating questions.';
+  }
+  QUIZ_GENERATING = false;
+  renderQuiz();
+}
+
+function renderCalendar(){
+  const main = document.getElementById('main');
+  let html = `<p class="unit-banner">Island School — 2026–27</p><h1 class="week-title">Reading &amp; Assignment Calendar</h1><p class="week-meta">Dates assume a normal 4-day meeting week; exact days/double-period placement pending your section's confirmed schedule. Weeks marked Buffer are built-in slack — cumulative review, extending into Unit 7, exam prep, or simply absorbing real-world pacing loss.</p><div class="card">`;
+  CALENDAR.forEach((c,i)=>{
+    if(c.beforeBreak) html += `<div class="cal-break">${c.beforeBreak}</div>`;
+    const w = WEEKS[i];
+    html += `<div class="cal-row ${c.buffer?'cal-buffer':''}">
+      <div class="cal-date">${c.range}</div>
+      <div>
+        ${ w
+          ? `<div class="cal-title">Week ${w.n} — ${w.label}</div><div class="cal-meta">${w.meta}</div>`
+          : `<div class="cal-title">Buffer Week</div><div class="cal-meta">No content assigned — flex for review, catch-up, or extension.</div>`
+        }
+        ${c.flag ? `<div class="cal-flag">${c.flag}</div>` : ''}
+      </div>
+    </div>`;
+  });
+  html += `</div>`;
+  main.innerHTML = html;
+}
+
+render(1);
+</script>
+</body>
+</html>
